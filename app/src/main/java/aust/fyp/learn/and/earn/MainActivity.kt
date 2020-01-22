@@ -1,15 +1,29 @@
 package aust.fyp.learn.and.earn
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+
+    var recView = findViewById<RecyclerView>(R.id.recView)
+    var adapter_: Adapter? = null // object
+    var listOfPersons: ArrayList<Person> = ArrayList<Person>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // this is some change
+        recView.layoutManager = LinearLayoutManager(this)
+        adapter_ = Adapter(listOfPersons)
+        recView.adapter = adapter_
+
+        listOfPersons.add(Person(name = "Ahmed", age = 12, country = "Pakistan"))
+        listOfPersons.add(Person(name = "Ahmed", country = "Pakistan", age = 12 ))
+        listOfPersons.add(Person(name = "Ahmed", age = 12, country = "Pakistan"))
+        listOfPersons.add(Person(  "Ahmed",  12,  "Pakistan"))
 
     }
+
 }
