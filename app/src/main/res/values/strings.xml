@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">LearnAndEarn</string>
+    <string name="app_name">Learn &amp; Earn</string>
+    <string name="app_desc">Platform for all</string>
 </resources>

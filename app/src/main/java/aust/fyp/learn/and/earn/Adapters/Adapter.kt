@@ -1,10 +1,12 @@
-package aust.fyp.learn.and.earn
+package aust.fyp.learn.and.earn.Adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import aust.fyp.learn.and.earn.Models.Person
+import aust.fyp.learn.and.earn.R
 
 class Adapter(var list: ArrayList<Person>) : RecyclerView.Adapter<Adapter.myViewsHolder>() {
 
@@ -15,7 +17,7 @@ class Adapter(var list: ArrayList<Person>) : RecyclerView.Adapter<Adapter.myView
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.myViewsHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewsHolder {
         var view: View = LayoutInflater.from(parent.context).inflate(R.layout.single_view, null)
         return myViewsHolder(view)
     }
@@ -24,7 +26,7 @@ class Adapter(var list: ArrayList<Person>) : RecyclerView.Adapter<Adapter.myView
         return list.size
     }
 
-    override fun onBindViewHolder(holder: Adapter.myViewsHolder, position: Int) {
+    override fun onBindViewHolder(holder: myViewsHolder, position: Int) {
         holder.name.text = list.get(position).name
         holder.country.text = list.get(position).country
     }
