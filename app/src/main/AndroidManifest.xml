@@ -3,7 +3,8 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="aust.fyp.learn.and.earn">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <dist:module dist:instant="true" />
 
     <application
@@ -12,9 +13,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Activities.CreateAccountStudent"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.CreateAccountTeacher"></activity>
+        <activity android:name=".Activities.CreateAccountStudent" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>

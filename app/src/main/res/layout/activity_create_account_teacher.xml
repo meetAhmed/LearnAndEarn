@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".Activities.CreateAccountStudent">
+    tools:context=".Activities.CreateAccountTeacher">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,6 +70,14 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Create Teacher Account"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:background="@drawable/bg_border"
@@ -81,11 +89,31 @@
             android:layout_height="wrap_content">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/email"
                 android:layout_width="match_parent"
+                android:id="@+id/full_name"
+                android:background="@drawable/bg_border"
+                android:layout_height="wrap_content"
+                android:hint="Full Name"
+                app:met_hideUnderline="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_border"
+            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:layout_height="wrap_content">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:id="@+id/address"
                 android:layout_height="wrap_content"
                 app:met_hideUnderline="true"
-                android:hint="Email Address" />
+                android:hint="Address" />
         </LinearLayout>
 
 
@@ -101,65 +129,85 @@
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
+                android:id="@+id/email"
+                android:layout_height="wrap_content"
                 app:met_hideUnderline="true"
+                android:hint="Email Address" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_border"
+            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:layout_height="wrap_content">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:id="@+id/phonenumber"
+                android:layout_height="wrap_content"
+                app:met_hideUnderline="true"
+                android:hint="phonenumber" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_border"
+            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:layout_height="wrap_content">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:id="@+id/City"
+                android:layout_height="wrap_content"
+                app:met_hideUnderline="true"
+                android:hint="city" />
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_border"
+            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:layout_height="wrap_content">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
                 android:id="@+id/password"
+                app:met_hideUnderline="true"
                 android:layout_height="wrap_content"
                 android:hint="Password" />
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:text="Forgot Password ?"
-            android:textStyle="bold"
-            android:gravity="end"
-            android:layout_marginTop="10dp"
-            android:textColor="#00BFA5"
-            android:textSize="18sp"
-            android:layout_height="wrap_content" />
-
 
         <Button
             android:layout_width="150dp"
             android:layout_marginTop="10dp"
-            android:onClick="login_account_click"
             android:layout_gravity="center"
             android:textColor="#fff"
             android:textStyle="bold"
+            android:onClick="create_account_click"
             android:layout_height="wrap_content"
             android:background="@drawable/filled_green"
-            android:text="LOGIN" />
-
-        <TextView
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:text="or"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:id="@+id/studentaccount"
-            android:layout_gravity="center"
-            android:textColor="#818181"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_border"
-            android:text="Create Account As Teacher" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:id="@+id/teacheraccount"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:textColor="#818181"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_border"
-            android:text="Create Account As Student" />
+            android:text="Create Account" />
 
 
     </LinearLayout>
