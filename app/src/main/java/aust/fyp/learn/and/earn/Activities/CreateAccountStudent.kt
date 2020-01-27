@@ -77,8 +77,7 @@ class CreateAccountStudent : AppCompatActivity() {
         passwordStr: String
     ) {
 
-        val URLs = URLs()
-        var request = object : StringRequest(Request.Method.POST, URLs.create_account,
+        var request = object : StringRequest(Request.Method.POST, URLs.CREATE_ACCOUNT,
             Response.Listener { response ->
 
 

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.CreateTeacherAccount">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -129,47 +130,6 @@
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="15dp"
-            android:paddingBottom="3dp"
-            android:paddingRight="15dp"
-            android:layout_height="wrap_content">
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
-                android:id="@+id/certifications"
-                app:met_hideUnderline="true"
-                android:layout_height="wrap_content"
-                android:hint="Certifications" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="15dp"
-            android:paddingBottom="3dp"
-            android:paddingRight="15dp"
-            android:layout_height="wrap_content">
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
-                android:id="@+id/employment_history"
-                app:met_hideUnderline="true"
-                android:layout_height="wrap_content"
-                android:hint="Employment History" />
-
-
-        </LinearLayout>
-
-
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:paddingTop="10dp"
@@ -220,8 +180,6 @@
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>
