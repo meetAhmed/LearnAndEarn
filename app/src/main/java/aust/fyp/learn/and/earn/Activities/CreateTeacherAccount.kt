@@ -1,25 +1,29 @@
 package aust.fyp.learn.and.earn.Activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
 import aust.fyp.learn.and.earn.R
+import aust.fyp.learn.and.earn.StoreRoom.Dialogs
+import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
 import aust.fyp.learn.and.earn.StoreRoom.URLs
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import org.json.JSONObject
 
 class CreateTeacherAccount : AppCompatActivity() {
     lateinit var full_name: EditText
     lateinit var address: EditText
     lateinit var email: EditText
     lateinit var password: EditText
-    lateinit var employment_history:EditText
-    lateinit var certifications:EditText
-    lateinit var phone_number:EditText
+    lateinit var phone_number: EditText
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +51,6 @@ class CreateTeacherAccount : AppCompatActivity() {
         val phone_number_str = phone_number.text.toString().trim()
 
 
-
         var isError = false
 
         if (password_str.isEmpty() || password_str.length < 8) {
@@ -62,7 +65,7 @@ class CreateTeacherAccount : AppCompatActivity() {
             email.requestFocus()
         }
 
-        if(phone_number_str.isEmpty()){
+        if (phone_number_str.isEmpty()) {
             isError = true
             phone_number.error = "please enter the employment history"
             phone_number.requestFocus()
@@ -81,7 +84,13 @@ class CreateTeacherAccount : AppCompatActivity() {
         }
 
         if (!isError) {
-            executeRequestForAccountCreation(full_name_str, address_str,phone_number_str, email_str, password_str);
+            executeRequestForAccountCreation(
+                full_name_str,
+                address_str,
+                phone_number_str,
+                email_str,
+                password_str
+            );
         }
 
 
@@ -95,19 +104,69 @@ class CreateTeacherAccount : AppCompatActivity() {
         passwordStr: String
     ) {
 
-        var request = object : StringRequest(Request.Method.POST, URLs.CREATE_ACCOUNT ,
-            Response.Listener { responce ->
+        var request = object : StringRequest(Request.Method.POST, URLs.CREATE_ACCOUNT,
+            Response.Listener { response ->
 
-        }, Response.ErrorListener {error ->
-                Toast.makeText(applicationContext , "something went wrong ",Toast.LENGTH_LONG).show()
-            }){
+                try {
+
+                    var mainOb = JSONObject(response)
+                    var message = mainOb.getString("message")
+                    val error = mainOb.getBoolean("error")
+
+                    if (error) {
+                        // error
+                        Dialogs.showMessage(this, message, "OK", object : AlertDialogInterface {
+                            override fun positiveButtonClick(dialogInterface: DialogInterface) {
+                                dialogInterface.dismiss()
+                            }
+
+                            override fun negativeButtonClick(dialogInterface: DialogInterface) {
+                            }
+                        })
+                    } else {
+                        var userOb = mainOb.getJSONObject("user")
+
+                        PreferenceManager.getInstance(applicationContext).setActiveUser()
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserId(userOb.getInt("ID"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserName(userOb.getString("name"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserAddress(userOb.getString("address"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserPhone(userOb.getString("phone_number"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserEmail(userOb.getString("email_address"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserPassword(userOb.getString("password"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserProfile(userOb.getString("profile_addresss"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserAccountType(userOb.getString("account_type"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setAccountStatus(userOb.getString("status"))
+
+                        var intent = Intent(this, VerificationActivity::class.java)
+                        var pack = Bundle()
+                        pack.putString("from", "creation")
+                        intent.putExtras(pack)
+                        startActivity(intent)
+                        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
+                }
+            }, Response.ErrorListener { error ->
+                Toast.makeText(applicationContext, "something went wrong ", Toast.LENGTH_LONG)
+                    .show()
+            }) {
             override fun getParams(): MutableMap<String, String> {
                 var map = HashMap<String, String>()
                 map["name"] = fullNameStr
                 map["address"] = addressStr
                 map["phone_number"] = phoneNumberStr
-
-                map["email"] = emailStr
+                map["email_address"] = emailStr
                 map["password"] = passwordStr
                 map["type"] = "teacher"
                 return map

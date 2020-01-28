@@ -1,12 +1,17 @@
 package aust.fyp.learn.and.earn.Activities
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
 import aust.fyp.learn.and.earn.R
+import aust.fyp.learn.and.earn.StoreRoom.Constants
+import aust.fyp.learn.and.earn.StoreRoom.Dialogs
+import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
 import aust.fyp.learn.and.earn.StoreRoom.URLs
 import com.android.volley.Request
 import com.android.volley.Response
@@ -62,22 +67,55 @@ class LoginActivity : AppCompatActivity() {
 
                     var mainOb = JSONObject(response)
                     var message = mainOb.getString("message")
+                    val error = mainOb.getBoolean("error")
 
-                    if (mainOb.getBoolean("error")) {
+                    if (error) {
                         // error
-                    } else {
+                        Dialogs.showMessage(this, message, "OK", object : AlertDialogInterface {
+                            override fun positiveButtonClick(dialogInterface: DialogInterface) {
+                                dialogInterface.dismiss()
+                            }
 
+                            override fun negativeButtonClick(dialogInterface: DialogInterface) {
+                            }
+                        })
+                    } else {
                         var userOb = mainOb.getJSONObject("user")
 
-                    }
+                        PreferenceManager.getInstance(applicationContext).setActiveUser()
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserId(userOb.getInt("ID"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserName(userOb.getString("name"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserAddress(userOb.getString("address"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserPhone(userOb.getString("phone_number"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserEmail(userOb.getString("email_address"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserPassword(userOb.getString("password"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserProfile(userOb.getString("profile_addresss"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setUserAccountType(userOb.getString("account_type"))
+                        PreferenceManager.getInstance(applicationContext)
+                            .setAccountStatus(userOb.getString("status"))
 
+                        if (PreferenceManager.getInstance(applicationContext).getUserAccountType()!!.trim().equals(
+                                Constants.TEACHER
+                            )
+                        ) {
+                            startActivity(Intent(this, MainActivityTeacher::class.java))
+                        } else {
+                            startActivity(Intent(this, MainActivityStudent::class.java))
+                        }
+                        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                        finish()
+                    }
                 } catch (e: Exception) {
                     Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
                 }
-
-
-
-                Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
             },
             Response.ErrorListener { error ->
                 Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_LONG).show()
@@ -86,7 +124,6 @@ class LoginActivity : AppCompatActivity() {
                 var map = HashMap<String, String>()
                 map["email"] = emailStr
                 map["password"] = passwordStr
-                map["type"] = "login"
                 return map
             }
         }
