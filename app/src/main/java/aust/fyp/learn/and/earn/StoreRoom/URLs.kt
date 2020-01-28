@@ -7,6 +7,5 @@ class URLs {
     val PROTOCOL = "http://"
 
     val create_account = PROTOCOL + IP_ADDRESS + PORT + "/users/create"
-    val login_account = PROTOCOL + IP_ADDRESS + PORT + "/users/login"
 
 }
