@@ -1,11 +1,13 @@
 package aust.fyp.learn.and.earn.StoreRoom
 
-class URLs {
+object URLs {
 
-    val IP_ADDRESS = "192.168.1.6"
-    val PORT = ":3005"
+    val IP_ADDRESS = "192.168.43.169"
+    val PORT = ":3010"
     val PROTOCOL = "http://"
 
-    val create_account = PROTOCOL + IP_ADDRESS + PORT + "/users/create"
+    val CREATE_ACCOUNT = PROTOCOL + IP_ADDRESS + PORT + "/users/create"
+    val LOGIN = PROTOCOL + IP_ADDRESS + PORT + "/users/login"
+
 
 }
