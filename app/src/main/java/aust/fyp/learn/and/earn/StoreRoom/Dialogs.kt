@@ -23,4 +23,19 @@ object Dialogs {
         alert.show()
     }
 
+    fun showMessage(
+        activity: Activity,
+        message: String
+    ) {
+
+        var builder = AlertDialog.Builder(activity)
+        builder.setMessage(message)
+        builder.setPositiveButton("OK", { dialogInterface, i ->
+            dialogInterface.dismiss()
+        })
+
+        var alert = builder.create()
+        alert.show()
+    }
+
 }

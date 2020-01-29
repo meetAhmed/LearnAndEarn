@@ -1,14 +1,17 @@
 package aust.fyp.learn.and.earn.Activities
 
+import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
 import aust.fyp.learn.and.earn.R
+import aust.fyp.learn.and.earn.StoreRoom.Constants
 import aust.fyp.learn.and.earn.StoreRoom.Dialogs
 import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
 import aust.fyp.learn.and.earn.StoreRoom.URLs
@@ -24,12 +27,19 @@ class CreateTeacherAccount : AppCompatActivity() {
     lateinit var email: EditText
     lateinit var password: EditText
     lateinit var phone_number: EditText
+    lateinit var progressDialog : ProgressDialog
+
+    companion object {
+        var TAG = "CreateTeacherAccount"
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_teacher_account)
 
+        progressDialog = ProgressDialog(this)
+        progressDialog.setCancelable(false)
 
         full_name = findViewById(R.id.full_name)
         password = findViewById(R.id.password)
@@ -104,8 +114,17 @@ class CreateTeacherAccount : AppCompatActivity() {
         passwordStr: String
     ) {
 
+        progressDialog.setMessage("Please wait - creating account")
+        progressDialog.show()
+
         var request = object : StringRequest(Request.Method.POST, URLs.CREATE_ACCOUNT,
             Response.Listener { response ->
+
+                Log.i(TAG, "response : " + response)
+
+                if(progressDialog != null && progressDialog.isShowing()){
+                    progressDialog.dismiss()
+                }
 
                 try {
 
@@ -126,40 +145,46 @@ class CreateTeacherAccount : AppCompatActivity() {
                     } else {
                         var userOb = mainOb.getJSONObject("user")
 
-                        PreferenceManager.getInstance(applicationContext).setActiveUser()
-                        PreferenceManager.getInstance(applicationContext)
+                        PreferenceManager.getInstance(applicationContext)!!.setActiveUser()
+                        PreferenceManager.getInstance(applicationContext)!!
                             .setUserId(userOb.getInt("ID"))
-                        PreferenceManager.getInstance(applicationContext)
+                        PreferenceManager.getInstance(applicationContext)!!
                             .setUserName(userOb.getString("name"))
-                        PreferenceManager.getInstance(applicationContext)
+                        PreferenceManager.getInstance(applicationContext)!!
                             .setUserAddress(userOb.getString("address"))
-                        PreferenceManager.getInstance(applicationContext)
+                        PreferenceManager.getInstance(applicationContext)!!
                             .setUserPhone(userOb.getString("phone_number"))
-                        PreferenceManager.getInstance(applicationContext)
+                        PreferenceManager.getInstance(applicationContext)!!
                             .setUserEmail(userOb.getString("email_address"))
-                        PreferenceManager.getInstance(applicationContext)
+                        PreferenceManager.getInstance(applicationContext)!!
                             .setUserPassword(userOb.getString("password"))
-                        PreferenceManager.getInstance(applicationContext)
+                        PreferenceManager.getInstance(applicationContext)!!
                             .setUserProfile(userOb.getString("profile_addresss"))
-                        PreferenceManager.getInstance(applicationContext)
+                        PreferenceManager.getInstance(applicationContext)!!
                             .setUserAccountType(userOb.getString("account_type"))
-                        PreferenceManager.getInstance(applicationContext)
+                        PreferenceManager.getInstance(applicationContext)!!
                             .setAccountStatus(userOb.getString("status"))
 
                         var intent = Intent(this, VerificationActivity::class.java)
                         var pack = Bundle()
-                        pack.putString("from", "creation")
+                        pack.putString("state", "loggeg_in")
                         intent.putExtras(pack)
                         startActivity(intent)
                         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                         finish()
                     }
                 } catch (e: Exception) {
-                    Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
+                    Log.i(TAG, "Exception : " + e);
+                    Dialogs.showMessage(this, Constants.error_message_volley)
                 }
             }, Response.ErrorListener { error ->
-                Toast.makeText(applicationContext, "something went wrong ", Toast.LENGTH_LONG)
-                    .show()
+
+                if(progressDialog != null && progressDialog.isShowing()){
+                    progressDialog.dismiss()
+                }
+
+                Log.i(TAG, "error : " + error)
+                Dialogs.showMessage(this, Constants.error_message_volley)
             }) {
             override fun getParams(): MutableMap<String, String> {
                 var map = HashMap<String, String>()
