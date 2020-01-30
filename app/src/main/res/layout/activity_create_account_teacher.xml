@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="10dp"
-    tools:context=".Activities.CreateAccountTeacher">
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,6 +93,7 @@
                 android:background="@drawable/bg_border"
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
+                app:met_floatingLabel="normal"
                 app:met_hideUnderline="true" />
 
         </LinearLayout>
@@ -131,6 +131,8 @@
                 android:layout_width="match_parent"
                 android:id="@+id/email"
                 android:layout_height="wrap_content"
+                app:met_floatingLabel="normal"
+                android:inputType="textEmailAddress"
                 app:met_hideUnderline="true"
                 android:hint="Email Address" />
 
@@ -149,6 +151,7 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:id="@+id/phonenumber"
+                android:inputType="phone"
                 android:layout_height="wrap_content"
                 app:met_hideUnderline="true"
                 android:hint="phonenumber" />
@@ -192,6 +195,8 @@
                 android:layout_width="match_parent"
                 android:id="@+id/password"
                 app:met_hideUnderline="true"
+                android:inputType="textPassword"
+                app:met_floatingLabel="normal"
                 android:layout_height="wrap_content"
                 android:hint="Password" />
 

@@ -6,10 +6,10 @@ import android.content.SharedPreferences
 class PreferenceManager private constructor() {
 
     companion object {
-        private lateinit var instance_of_pref_manager: PreferenceManager
+        private var instance_of_pref_manager: PreferenceManager? = null
         private lateinit var pref: SharedPreferences
         private lateinit var prefEditor: SharedPreferences.Editor
-        fun getInstance(context: Context): PreferenceManager {
+        fun getInstance(context: Context): PreferenceManager? {
             if (instance_of_pref_manager == null) {
                 instance_of_pref_manager = PreferenceManager()
                 pref = context.getSharedPreferences(

@@ -18,4 +18,8 @@ object Constants {
     val STUDENT = "student"
     val TEACHER = "teacher"
 
+    val error_message_volley =
+        "Something went wrong during the execution of request.\nPlease check internet connection or contact support center."
+    var error_message_exception = "Something went wrong during the parsing of data."
+
 }

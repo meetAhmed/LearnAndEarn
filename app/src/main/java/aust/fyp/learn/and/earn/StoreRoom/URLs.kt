@@ -8,6 +8,6 @@ object URLs {
 
     val CREATE_ACCOUNT = PROTOCOL + IP_ADDRESS + PORT + "/users/create"
     val LOGIN = PROTOCOL + IP_ADDRESS + PORT + "/users/login"
-
+    val VERIFY_CODE = PROTOCOL + IP_ADDRESS + PORT + "/users/verify"
 
 }
