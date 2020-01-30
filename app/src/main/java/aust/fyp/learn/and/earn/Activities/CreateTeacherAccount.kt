@@ -11,10 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
 import aust.fyp.learn.and.earn.R
-import aust.fyp.learn.and.earn.StoreRoom.Constants
-import aust.fyp.learn.and.earn.StoreRoom.Dialogs
-import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
-import aust.fyp.learn.and.earn.StoreRoom.URLs
+import aust.fyp.learn.and.earn.StoreRoom.*
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -197,7 +194,7 @@ class CreateTeacherAccount : AppCompatActivity() {
                 return map
             }
         }
-        Volley.newRequestQueue(applicationContext).add(request)
+       RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
     }
 
 

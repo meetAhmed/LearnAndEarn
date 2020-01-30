@@ -11,10 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
 import aust.fyp.learn.and.earn.R
-import aust.fyp.learn.and.earn.StoreRoom.Constants
-import aust.fyp.learn.and.earn.StoreRoom.Dialogs
-import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
-import aust.fyp.learn.and.earn.StoreRoom.URLs
+import aust.fyp.learn.and.earn.StoreRoom.*
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -27,7 +24,8 @@ class CreateAccountStudent : AppCompatActivity() {
     lateinit var address: EditText
     lateinit var email: EditText
     lateinit var password: EditText
-    lateinit var progressDialog : ProgressDialog
+    lateinit var phonenumber: EditText
+    lateinit var progressDialog: ProgressDialog
 
     companion object {
         var TAG = "CreateAccountStudent"
@@ -41,6 +39,7 @@ class CreateAccountStudent : AppCompatActivity() {
         progressDialog.setCancelable(false)
 
 
+        phonenumber = findViewById(R.id.phonenumber)
         full_name = findViewById(R.id.full_name)
         password = findViewById(R.id.password)
         address = findViewById(R.id.address)
@@ -54,6 +53,7 @@ class CreateAccountStudent : AppCompatActivity() {
         val address_str = address.text.toString().trim()
         val email_str = email.text.toString().trim()
         val password_str = password.text.toString().trim()
+        val phonenumber_str = phonenumber.text.toString().trim()
 
         var isError = false
 
@@ -69,6 +69,14 @@ class CreateAccountStudent : AppCompatActivity() {
             email.requestFocus()
         }
 
+
+        if (phonenumber_str.isEmpty()) {
+            isError = true
+            phonenumber.error = "Please enter valid phone number"
+            phonenumber.requestFocus()
+        }
+
+
         if (address_str.isEmpty()) {
             isError = true
             address.error = "Please enter valid address"
@@ -82,7 +90,13 @@ class CreateAccountStudent : AppCompatActivity() {
         }
 
         if (!isError) {
-            executeRequestForAccountCreation(full_name_str, address_str, email_str, password_str);
+            executeRequestForAccountCreation(
+                full_name_str,
+                address_str,
+                email_str,
+                password_str,
+                phonenumber_str
+            );
         }
 
 
@@ -92,7 +106,8 @@ class CreateAccountStudent : AppCompatActivity() {
         fullNameStr: String,
         addressStr: String,
         emailStr: String,
-        passwordStr: String
+        passwordStr: String,
+        phonenumber_str: String
     ) {
 
         progressDialog.setMessage("Please wait - creating account")
@@ -103,7 +118,7 @@ class CreateAccountStudent : AppCompatActivity() {
 
                 Log.i(CreateTeacherAccount.TAG, "response : " + response)
 
-                if(progressDialog != null && progressDialog.isShowing()){
+                if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss()
                 }
 
@@ -127,14 +142,15 @@ class CreateAccountStudent : AppCompatActivity() {
                         var userOb = mainOb.getJSONObject("user")
 
                         PreferenceManager.getInstance(applicationContext)!!.setActiveUser()
+
+                        PreferenceManager.getInstance(applicationContext)!!
+                            .setUserPhone(userOb.getString("phone_number"))
                         PreferenceManager.getInstance(applicationContext)!!
                             .setUserId(userOb.getInt("ID"))
                         PreferenceManager.getInstance(applicationContext)!!
                             .setUserName(userOb.getString("name"))
                         PreferenceManager.getInstance(applicationContext)!!
                             .setUserAddress(userOb.getString("address"))
-                        PreferenceManager.getInstance(applicationContext)!!
-                            .setUserPhone(userOb.getString("phone_number"))
                         PreferenceManager.getInstance(applicationContext)!!
                             .setUserEmail(userOb.getString("email_address"))
                         PreferenceManager.getInstance(applicationContext)!!
@@ -160,7 +176,7 @@ class CreateAccountStudent : AppCompatActivity() {
                 }
             }, Response.ErrorListener { error ->
 
-                if(progressDialog != null && progressDialog.isShowing()){
+                if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss()
                 }
 
@@ -172,13 +188,14 @@ class CreateAccountStudent : AppCompatActivity() {
                 map["name"] = fullNameStr
                 map["address"] = addressStr
                 map["email"] = emailStr
+                map["phone_number"] = phonenumber_str
                 map["password"] = passwordStr
                 map["type"] = "student"
                 return map
             }
         }
 
-        Volley.newRequestQueue(applicationContext).add(request)
+        RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
     }
 
 }

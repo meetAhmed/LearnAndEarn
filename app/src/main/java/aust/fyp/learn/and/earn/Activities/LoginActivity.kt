@@ -1,5 +1,6 @@
 package aust.fyp.learn.and.earn.Activities
 
+import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,10 +13,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
 import aust.fyp.learn.and.earn.R
-import aust.fyp.learn.and.earn.StoreRoom.Constants
-import aust.fyp.learn.and.earn.StoreRoom.Dialogs
-import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
-import aust.fyp.learn.and.earn.StoreRoom.URLs
+import aust.fyp.learn.and.earn.StoreRoom.*
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -26,6 +24,8 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var email: EditText
     lateinit var password: EditText
+    lateinit var progressDialog: ProgressDialog
+
     companion object {
         var TAG = "LoginActivity"
     }
@@ -37,8 +37,14 @@ class LoginActivity : AppCompatActivity() {
         email = findViewById(R.id.email)
         password = findViewById(R.id.password)
 
-        if(PreferenceManager.getInstance(applicationContext)!!.isUserActive()){
-            if (PreferenceManager.getInstance(applicationContext)!!.getAccountStatus()!!.trim().equals("unverified")) {
+        progressDialog = ProgressDialog(this)
+        progressDialog.setCancelable(false)
+
+        if (PreferenceManager.getInstance(applicationContext)!!.isUserActive()) {
+            if (PreferenceManager.getInstance(applicationContext)!!.getAccountStatus()!!.trim().equals(
+                    "unverified"
+                )
+            ) {
                 var intent = Intent(this, VerificationActivity::class.java)
                 var pack = Bundle()
                 pack.putString("state", "loggeg_in")
@@ -47,7 +53,10 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             } else {
 
-                if (PreferenceManager.getInstance(applicationContext)!!.getUserAccountType()!!.trim().equals(Constants.STUDENT)) {
+                if (PreferenceManager.getInstance(applicationContext)!!.getUserAccountType()!!.trim().equals(
+                        Constants.STUDENT
+                    )
+                ) {
                     startActivity(Intent(this, MainActivityStudent::class.java))
                 } else {
                     startActivity(Intent(this, MainActivityTeacher::class.java))
@@ -85,7 +94,82 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    fun restore_password(view: View) {
+
+        password.setError(null)
+        password.clearFocus()
+
+        if (email.text.toString().trim().isEmpty()) {
+            email.error = "please enter your email"
+            email.requestFocus()
+        } else {
+
+
+            progressDialog.setMessage("sending verification email")
+            progressDialog.show()
+
+            var request = object : StringRequest(
+                Request.Method.POST, URLs.RESEND_EMAIL,
+                Response.Listener { response ->
+
+                    try {
+
+                        if (progressDialog != null && progressDialog.isShowing()) {
+                            progressDialog.dismiss()
+                        }
+
+                        var mainOb = JSONObject(response)
+                        var message = mainOb.getString("message")
+                        val error = mainOb.getBoolean("error")
+
+                        if (error) {
+                            // error
+                            Dialogs.showMessage(this, message, "OK", object : AlertDialogInterface {
+                                override fun positiveButtonClick(dialogInterface: DialogInterface) {
+                                    dialogInterface.dismiss()
+                                }
+
+                                override fun negativeButtonClick(dialogInterface: DialogInterface) {
+                                }
+                            })
+                        } else {
+                            var intent = Intent(this, VerificationActivity::class.java)
+                            var pack = Bundle()
+                            pack.putString("state", "forgot_password")
+                            pack.putString("email", email.text.toString().trim())
+                            intent.putExtras(pack)
+                            startActivity(intent)
+                            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                        }
+                    } catch (e: Exception) {
+                        Log.i(TAG, "exception : " + e);
+                        Dialogs.showMessage(this, Constants.error_message_exception)
+                    }
+
+
+                },
+                Response.ErrorListener { error ->
+                    if (progressDialog != null && progressDialog.isShowing()) {
+                        progressDialog.dismiss()
+                    }
+                    Log.i(TAG, "error : " + error);
+                    Dialogs.showMessage(this, Constants.error_message_volley)
+                }) {
+                override fun getParams(): MutableMap<String, String> {
+                    var map = HashMap<String, String>()
+                    map["email"] = email.text.toString().trim()
+                    return map
+                }
+            }
+
+            RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
+        }
+    }
+
     private fun openapplication(emailStr: String, passwordStr: String) {
+
+        progressDialog.setMessage("checking account")
+        progressDialog.show()
 
         var request = object : StringRequest(
             Request.Method.POST, URLs.LOGIN,
@@ -93,6 +177,10 @@ class LoginActivity : AppCompatActivity() {
 
 
                 try {
+
+                    if (progressDialog != null && progressDialog.isShowing()) {
+                        progressDialog.dismiss()
+                    }
 
                     var mainOb = JSONObject(response)
                     var message = mainOb.getString("message")
@@ -166,6 +254,9 @@ class LoginActivity : AppCompatActivity() {
 
             },
             Response.ErrorListener { error ->
+                if (progressDialog != null && progressDialog.isShowing()) {
+                    progressDialog.dismiss()
+                }
                 Log.i(TAG, "error : " + error);
                 Dialogs.showMessage(this, Constants.error_message_volley)
             }) {
@@ -177,7 +268,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        Volley.newRequestQueue(applicationContext).add(request)
+        RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
     }
 
     fun teacher_account(view: View) {

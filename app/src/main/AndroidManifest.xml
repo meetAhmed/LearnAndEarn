@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.VerificationActivity"></activity>
+        <activity android:name=".Activities.SetNewPassword"></activity>
+        <activity android:name=".Activities.VerificationActivity" />
         <activity android:name=".Activities.CreateTeacherAccount" />
         <activity android:name=".Activities.MainActivityStudent" />
         <activity android:name=".Activities.MainActivityTeacher" />
