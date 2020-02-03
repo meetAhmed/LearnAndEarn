@@ -37,7 +37,6 @@ class MainActivityTeacher : AppCompatActivity() {
         viewPagerAdapter.addFragment(ClassRoomFragmentTeacher(), "Class Room")
         viewPagerAdapter.addFragment(SettingsFragment(), "Settings")
         viewPager.adapter = viewPagerAdapter
-        bottomNav.setupWithViewPager(viewPager)
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -55,7 +54,7 @@ class MainActivityTeacher : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
 
                 if (previousItem == null) {
-                    bottomNav.menu.getItem(R.id.home).setChecked(false)
+                    bottomNav.menu.getItem(0).setChecked(false)
                 } else {
                     previousItem?.setChecked(false)
                 }
