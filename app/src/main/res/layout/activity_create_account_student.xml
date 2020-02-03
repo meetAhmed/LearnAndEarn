@@ -94,6 +94,7 @@
                 android:background="@drawable/bg_border"
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
+                app:met_floatingLabel="highlight"
                 app:met_hideUnderline="true" />
 
         </LinearLayout>

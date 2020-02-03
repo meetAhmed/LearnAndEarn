@@ -56,6 +56,8 @@
                     android:layout_height="wrap_content"
                     android:text="Edit Profile Details"
                     android:textSize="20sp"
+                    android:id="@+id/edit_profile"
+                    android:onClick="edit_profile"
                     android:textStyle="bold" />
 
 
