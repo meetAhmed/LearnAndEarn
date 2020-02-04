@@ -31,6 +31,8 @@ class MainActivityTeacher : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         bottomNav = findViewById(R.id.bottomNav)
 
+        supportActionBar!!.hide()
+
         viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
         viewPagerAdapter.addFragment(HomeFragmentTeacher(), "Home")
         viewPagerAdapter.addFragment(InboxFragmentTeacher(), "Inbox")
