@@ -11,5 +11,6 @@ object URLs {
     val VERIFY_CODE = PROTOCOL + IP_ADDRESS + PORT + "/users/verify"
     val RESEND_EMAIL = PROTOCOL + IP_ADDRESS + PORT + "/users/resend_email"
     val FORGOT_PASSWORD = PROTOCOL + IP_ADDRESS + PORT + "/users/forgot_password"
+    val EDIT_PROFILE = PROTOCOL + IP_ADDRESS + PORT + "/users/edit_profile"
 
 }

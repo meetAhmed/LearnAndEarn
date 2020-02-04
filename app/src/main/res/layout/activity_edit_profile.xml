@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
     android:layout_height="match_parent"
     tools:context=".Activities.EditProfile">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+       android:text="Edit Profile"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#00BFA5"
+       />
+
+
+    <EditText
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Name"
+        android:id="@+id/name_edit"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+
+        android:layout_weight="1"
+        android:hint="Address"
+
+        android:id="@+id/address_edit"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+
+        android:layout_weight="1"
+        android:hint="Phone Number"
+        android:id="@+id/phone_number_edit"/>
+    <Button
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Update"
+        android:onClick="update_edit_profile"
+        android:background="@drawable/filled_light_blue"
+        android:textColor="#EEFBFBFB"/>
+
+
+
+
+
+
+
+
+</LinearLayout>
