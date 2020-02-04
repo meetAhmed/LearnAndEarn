@@ -19,7 +19,7 @@ class ClassRoomFragmentTeacher : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_class_room, container, false)
+        return inflater.inflate(R.layout.fragment_class_room_teacher, container, false)
     }
 
 

@@ -19,7 +19,7 @@ class InboxFragmentTeacher : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_inbox, container, false)
+        return inflater.inflate(R.layout.fragment_inbox_teacher, container, false)
     }
 
 

@@ -2,6 +2,7 @@ package aust.fyp.learn.and.earn.Settings
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -16,9 +17,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import aust.fyp.learn.and.earn.R
-import aust.fyp.learn.and.earn.StoreRoom.Dialogs
-import aust.fyp.learn.and.earn.StoreRoom.Store
+import aust.fyp.learn.and.earn.StoreRoom.*
+import com.android.volley.Request.Method.POST
+import com.koushikdutta.async.future.FutureCallback
+import com.koushikdutta.ion.Ion
+import com.koushikdutta.ion.ProgressCallback
+import com.squareup.picasso.Picasso
 import designer.ahmed.android_class.batutils.helper
+import org.json.JSONObject
+import java.io.File
+import java.lang.Exception
+import java.net.URL
 
 
 class ChangeProfilePicture : AppCompatActivity() {
@@ -29,12 +38,22 @@ class ChangeProfilePicture : AppCompatActivity() {
     var permissionCode: Int = 100
     var file_path: String? = null
     var isGalleryOpenRequest: Boolean = false
+    lateinit var progressDialog: ProgressDialog
+    var TAG = "ChangeProfilePicture"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_profile_picture)
 
         profile_image = findViewById(R.id.profile_image)
+        progressDialog = ProgressDialog(this)
+        progressDialog.setCancelable(false)
+
+        supportActionBar!!.hide()
+
+        Picasso.get()
+            .load(URLs.getImageUrl(PreferenceManager.getInstance(applicationContext!!)!!.getUserProfile()))
+            .into(profile_image);
 
         if (!isReadStorageAllowed()) {
             ActivityCompat.requestPermissions(this, permissionArr, permissionCode)
@@ -69,9 +88,7 @@ class ChangeProfilePicture : AppCompatActivity() {
                 var bitmap = helper.getBitmapFromUri(data.data, applicationContext)
                 bitmap = helper.resizeImage(bitmap)
                 profile_image.setImageBitmap(bitmap)
-
-              //  Log.i("test", file_path)
-               // Log.i("test", "" + bitmap)
+                file_path = helper.getFilePathFromUri(data.data, applicationContext)
             }
         }
     }
@@ -105,7 +122,67 @@ class ChangeProfilePicture : AppCompatActivity() {
     }
 
     fun upload_picture(view: View) {
+        if (file_path == null) {
+            Toast.makeText(applicationContext, "Please select Image first", Toast.LENGTH_SHORT)
+                .show()
+        } else {
+            progressDialog.setMessage("Uploading profile image")
+            progressDialog.show()
 
+            var file = File(file_path)
+            Ion.with(applicationContext).load("POST", URLs.UPLOAD)
+                .uploadProgressHandler(object : ProgressCallback {
+                    override fun onProgress(downloaded: Long, total: Long) {
+                        var percent = (downloaded / total) * 100;
+                        progressDialog.setMessage("Uploading profile image $percent %")
+                    }
+                })
+                .setMultipartFile("image", file)
+                .setMultipartParameter("action", "profile_update")
+                .setMultipartParameter(
+                    "userId",
+                    PreferenceManager.getInstance(applicationContext)!!.getUserId().toString()
+                )
+                .asString()
+                .setCallback(object : FutureCallback<String> {
+                    override fun onCompleted(e: Exception?, result: String?) {
+                        Log.i(TAG, "Exception: $e :: result: $result");
+                        if (progressDialog != null && progressDialog.isShowing()) {
+                            progressDialog.dismiss()
+                        }
+
+                        if (result != null) {
+                            var mainObject = JSONObject(result)
+
+                            if (mainObject.getBoolean("error")) {
+                                Dialogs.showMessage(
+                                    this@ChangeProfilePicture,
+                                    mainObject.getString("message")
+                                )
+                            } else {
+                                Toast.makeText(
+                                    applicationContext,
+                                    mainObject.getString("message"),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                                PreferenceManager.getInstance(applicationContext)!!.setUserProfile(
+                                    mainObject.getString("profile")
+                                )
+
+                                finish()
+
+                            }
+
+                        } else {
+                            Dialogs.showMessage(
+                                this@ChangeProfilePicture,
+                                Constants.error_message_volley
+                            )
+                        }
+                    }
+                })
+        }
     }
 
 }

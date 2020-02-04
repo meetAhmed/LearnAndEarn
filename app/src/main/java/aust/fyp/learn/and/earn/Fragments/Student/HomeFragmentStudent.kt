@@ -1,4 +1,4 @@
-package aust.fyp.learn.and.earn.Fragments.Teacher
+package aust.fyp.learn.and.earn.Fragments.Student
 
 
 import android.os.Bundle
@@ -9,17 +9,17 @@ import android.view.ViewGroup
 
 import aust.fyp.learn.and.earn.R
 
-class HomeFragmentTeacher : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+/**
+ * A simple [Fragment] subclass.
+ */
+class HomeFragmentStudent : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home_teacher, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home_fragment_student, container, false)
     }
 
 
