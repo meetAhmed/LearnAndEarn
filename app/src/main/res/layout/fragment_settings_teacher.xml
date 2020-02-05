@@ -109,6 +109,7 @@
                     android:layout_weight="1.5">
 
                     <ImageView
+                        android:id="@+id/user_dp"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:src="@drawable/user" />
@@ -150,6 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:id="@+id/education_history_view"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
@@ -257,7 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/filled_light_green"
+                android:background="@drawable/filled_light_green_half_rounded"
                 android:onClick="log_out"
                 android:orientation="horizontal"
                 android:padding="10dp"

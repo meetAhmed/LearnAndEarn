@@ -4,4 +4,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="degree_titles">
+        <item>MATRIC</item>
+        <item>FSC</item>
+        <item>BS</item>
+        <item>MS</item>
+        <item>PHD</item>
+        <item>DIPLOMA</item>
+    </string-array>
+
 </resources>
