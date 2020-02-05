@@ -18,7 +18,7 @@ import aust.fyp.learn.and.earn.Settings.EducationHistory
 import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
 import aust.fyp.learn.and.earn.StoreRoom.URLs
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings_teacher.*
 
 class SettingsFragment : Fragment() {
 
@@ -35,19 +35,23 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        layoutView = inflater.inflate(R.layout.fragment_settings, container, false)
+        layoutView = inflater.inflate(R.layout.fragment_settings_teacher, container, false)
         user_name_textView = layoutView.findViewById(R.id.user_name)
         user_dp = layoutView.findViewById(R.id.profile_image)
         profile_image = layoutView.findViewById(R.id.profile_image)
 
-
-        layoutView.findViewById<LinearLayout>(R.id.change_profile_picture).setOnClickListener {
+        layoutView.findViewById<LinearLayout>(R.id.education_history_view).setOnClickListener {
             startActivity(Intent(context, EducationHistory::class.java))
         }
-        layoutView.findViewById<LinearLayout>(R.id.edit_profile).setOnClickListener { startActivity(
-                Intent(context,EditProfile ::class.java))
+        layoutView.findViewById<LinearLayout>(R.id.edit_profile).setOnClickListener {
+            startActivity(
+                Intent(context, EditProfile::class.java)
+            )
         }
 
+        layoutView.findViewById<LinearLayout>(R.id.change_profile_picture).setOnClickListener {
+            startActivity(Intent(context, ChangeProfilePicture::class.java))
+        }
 
         return layoutView
     }
@@ -56,9 +60,6 @@ class SettingsFragment : Fragment() {
         super.onResume()
 
         user_name.text = PreferenceManager.getInstance(context!!)!!.getUserName()
-        layoutView.findViewById<LinearLayout>(R.id.change_profile_picture).setOnClickListener {
-            startActivity(Intent(context, ChangeProfilePicture::class.java))
-        }
 
         Picasso.get()
             .load(URLs.getImageUrl(PreferenceManager.getInstance(context!!)!!.getUserProfile()))
@@ -68,8 +69,6 @@ class SettingsFragment : Fragment() {
             .into(user_dp)
 
     }
-
-
 
 
 }

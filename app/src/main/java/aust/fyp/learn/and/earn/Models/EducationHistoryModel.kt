@@ -13,16 +13,4 @@ open class EducationHistoryModel() : RealmObject() {
     var degree_title: String = ""
     var description: String = ""
 
-    constructor(
-        _recordID: Int,
-        _userID: Int,
-        _degree_title: String,
-        _description: String
-    ) : this() {
-        this.recordID = _recordID
-        this.userID = _userID
-        this.degree_title = _degree_title
-        this.description = _description
-    }
-
 }

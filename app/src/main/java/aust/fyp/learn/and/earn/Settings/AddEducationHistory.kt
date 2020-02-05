@@ -69,25 +69,25 @@ class AddEducationHistory : AppCompatActivity() {
                             Dialogs.showMessage(this, message)
                         } else {
 
-                            var model = EducationHistoryModel(
-                                mainOb.getInt("insertId"),
-                                PreferenceManager.getInstance(applicationContext)!!.getUserId(),
-                                degree_title.selectedItem.toString(),
-                                description.text.toString().trim()
-                            )
+                            var degree_title_str = degree_title.selectedItem.toString()
+                            var desc_str = description.text.toString().trim()
 
                             Realm.getDefaultInstance().executeTransaction { realm ->
 
-                                var prevCheck: EducationHistoryModel? =
-                                    realm.where(EducationHistoryModel::class.java)
-                                        .equalTo("recordID", model.recordID).findFirst()
+                                var model: EducationHistoryModel =
+                                    realm.createObject(
+                                        EducationHistoryModel::class.java,
+                                        mainOb.getInt("insertId")
+                                    )
 
-                                if (prevCheck == null) {
-                                    realm.insert(model)
-                                } else {
-                                    prevCheck.deleteFromRealm()
-                                    realm.insert(model)
+                                model.apply {
+                                    userID =
+                                        PreferenceManager.getInstance(applicationContext!!)!!.getUserId()
+                                    degree_title = degree_title_str
+                                    description = desc_str
                                 }
+
+                                realm.insert(model)
 
                                 Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT)
                                     .show()

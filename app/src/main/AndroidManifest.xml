@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Settings.AddEducationHistory"></activity>
+        <activity android:name=".Activities.AddNewSubject"></activity>
+        <activity android:name=".Settings.AddEducationHistory" />
         <activity android:name=".Settings.EducationHistory" />
         <activity android:name=".Activities.MainActivityStudent" />
         <activity android:name=".Settings.ChangeProfilePicture" />
@@ -26,6 +27,7 @@
         <activity android:name=".Activities.CreateTeacherAccount" />
         <activity android:name=".Activities.MainActivityTeacher" />
         <activity android:name=".Activities.CreateAccountStudent" />
+        <activity android:name=".Activities.EditProfile" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

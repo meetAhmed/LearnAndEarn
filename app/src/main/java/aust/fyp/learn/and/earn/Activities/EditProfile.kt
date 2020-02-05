@@ -15,16 +15,16 @@ import aust.fyp.learn.and.earn.StoreRoom.*
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
+import kotlinx.android.synthetic.main.single_view.*
 import org.json.JSONObject
 
 class EditProfile : AppCompatActivity() {
 
 
-    lateinit var name_edit : EditText
-    lateinit var address_edit : EditText
-    lateinit var phone_number_edit : EditText
+    lateinit var name_edit: EditText
+    lateinit var address_edit: EditText
+    lateinit var phone_number_edit: EditText
     lateinit var progressDialog: ProgressDialog
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,16 +38,15 @@ class EditProfile : AppCompatActivity() {
         progressDialog.setCancelable(false)
 
         name_edit.setText(PreferenceManager.getInstance(this)!!.getUserName())
+        name_edit.setSelection(name_edit.text.toString().trim().length)
+
         address_edit.setText(PreferenceManager.getInstance(this)!!.getUserAddress())
         phone_number_edit.setText(PreferenceManager.getInstance(this)!!.getUserPhone())
 
 
-
-
-
-
     }
-    fun update_edit_profile(view: View){
+
+    fun update_edit_profile(view: View) {
         progressDialog.setMessage("update profiling")
         progressDialog.show()
 
@@ -76,6 +75,15 @@ class EditProfile : AppCompatActivity() {
                             }
                         })
                     } else {
+
+                        PreferenceManager.getInstance(applicationContext)!!.setUserName(name_edit.text.toString().trim())
+                        PreferenceManager.getInstance(applicationContext)!!.setUserAddress(
+                            address_edit.text.toString().trim()
+                        )
+                        PreferenceManager.getInstance(applicationContext)!!.setUserPhone(
+                            phone_number_edit.text.toString().trim()
+                        )
+
                         Dialogs.showMessage(this, message, "OK", object : AlertDialogInterface {
                             override fun positiveButtonClick(dialogInterface: DialogInterface) {
                                 dialogInterface.dismiss()
@@ -102,7 +110,8 @@ class EditProfile : AppCompatActivity() {
             }) {
             override fun getParams(): MutableMap<String, String> {
                 var map = HashMap<String, String>()
-                map["userid"] = PreferenceManager.getInstance(applicationContext)!!.getUserId().toString()
+                map["userid"] =
+                    PreferenceManager.getInstance(applicationContext)!!.getUserId().toString()
                 map["name"] = name_edit.text.toString().trim()
                 map["address"] = address_edit.text.toString().trim()
                 map["phone_number"] = phone_number_edit.text.toString().trim()
@@ -115,5 +124,5 @@ class EditProfile : AppCompatActivity() {
     }
 
 
-    }
+}
 
