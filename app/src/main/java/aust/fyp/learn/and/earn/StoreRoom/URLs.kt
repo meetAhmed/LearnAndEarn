@@ -21,6 +21,9 @@ object URLs {
     val ADD_EDUCATION_HISTORY = PROTOCOL + IP_ADDRESS + PORT + "/education/history/add"
     val FETCH_RECORDS = PROTOCOL + IP_ADDRESS + PORT + "/education/history/read"
 
+    //add new subject
+    val SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/add"
+
     fun getImageUrl(image_name: String?): String {
         return PROTOCOL + IP_ADDRESS + PORT + "/uploadedFiles/$image_name"
     }

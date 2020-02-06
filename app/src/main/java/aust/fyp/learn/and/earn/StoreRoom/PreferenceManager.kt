@@ -38,8 +38,11 @@ class PreferenceManager private constructor() {
         prefEditor.putString(Constants.USER_PASSWORD, Constants.UNDEFINED)
         prefEditor.putString(Constants.USER_ACCOUNT_TYPE, Constants.UNDEFINED)
         prefEditor.putString(Constants.USER_STAUS, Constants.UNDEFINED)
+
         prefEditor.commit()
     }
+
+
 
     fun isUserActive(): Boolean {
         return pref.getBoolean(Constants.USER_ACTIVE, false)
