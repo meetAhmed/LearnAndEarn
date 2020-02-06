@@ -15,6 +15,7 @@ import aust.fyp.learn.and.earn.Activities.EditProfile
 import aust.fyp.learn.and.earn.R
 import aust.fyp.learn.and.earn.Settings.ChangeProfilePicture
 import aust.fyp.learn.and.earn.Settings.EducationHistory
+import aust.fyp.learn.and.earn.StoreRoom.Constants
 import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
 import aust.fyp.learn.and.earn.StoreRoom.URLs
 import com.squareup.picasso.Picasso
@@ -52,6 +53,18 @@ class SettingsFragment : Fragment() {
         layoutView.findViewById<LinearLayout>(R.id.change_profile_picture).setOnClickListener {
             startActivity(Intent(context, ChangeProfilePicture::class.java))
         }
+
+        if (PreferenceManager.getInstance(context!!)!!.getUserAccountType()!!.trim().equals(
+                Constants.TEACHER
+            )
+        ) {
+            layoutView.findViewById<LinearLayout>(R.id.education_history_view).visibility =
+                View.VISIBLE
+
+            layoutView.findViewById<LinearLayout>(R.id.manage_employment_history).visibility =
+                View.VISIBLE
+        }
+
 
         return layoutView
     }

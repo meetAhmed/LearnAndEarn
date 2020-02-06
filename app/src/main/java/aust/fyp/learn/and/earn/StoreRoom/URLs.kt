@@ -23,6 +23,7 @@ object URLs {
 
     //add new subject
     val SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/add"
+    val FETCH_SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/read"
 
     fun getImageUrl(image_name: String?): String {
         return PROTOCOL + IP_ADDRESS + PORT + "/uploadedFiles/$image_name"

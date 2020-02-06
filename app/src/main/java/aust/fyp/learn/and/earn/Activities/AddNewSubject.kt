@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
 import aust.fyp.learn.and.earn.Models.AddSubjectModel
@@ -21,15 +22,19 @@ import org.json.JSONObject
 
 class AddNewSubject : AppCompatActivity() {
 
-    lateinit var subject_name : EditText
-    lateinit var description : EditText
-    lateinit var price_per_month :EditText
+    lateinit var subject_name: EditText
+    lateinit var description: EditText
+    lateinit var price_per_month: EditText
     lateinit var progressDialog: ProgressDialog
+    lateinit var category: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_subject)
 
+        supportActionBar!!.hide()
+
+        category = findViewById(R.id.category)
         subject_name = findViewById(R.id.subject_name)
         description = findViewById(R.id.description)
         price_per_month = findViewById(R.id.price_per_month)
@@ -37,10 +42,9 @@ class AddNewSubject : AppCompatActivity() {
         progressDialog.setCancelable(false)
 
 
-
     }
 
-    fun save(view : View){
+    fun save(view: View) {
 
         progressDialog.setMessage("your subject is adding ")
         progressDialog.show()
@@ -65,9 +69,9 @@ class AddNewSubject : AppCompatActivity() {
                         Dialogs.showMessage(this, message)
                     } else {
 
-                        var subject_name_str =subject_name.text.toString().trim()
-                        var description_str =description.text.toString().trim()
-                        var price_per_month_str =price_per_month.text.toString().trim()
+                        var subject_name_str = subject_name.text.toString().trim()
+                        var description_str = description.text.toString().trim()
+                        var price_per_month_str = price_per_month.text.toString().trim()
 
 
 
@@ -113,7 +117,7 @@ class AddNewSubject : AppCompatActivity() {
                     PreferenceManager.getInstance(applicationContext)!!.getUserId().toString()
                 map["subject_name"] = subject_name.text.toString().trim()
                 map["price_per_month"] = price_per_month.text.toString().trim()
-
+                map["category"] = category.selectedItem.toString().toLowerCase().trim()
                 return map
             }
         }
@@ -121,5 +125,5 @@ class AddNewSubject : AppCompatActivity() {
         RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
 
     }
-    }
 }
+

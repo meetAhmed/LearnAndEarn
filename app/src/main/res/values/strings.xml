@@ -14,4 +14,23 @@
         <item>DIPLOMA</item>
     </string-array>
 
+
+    <string-array name="categories">
+        <item>MATRIC</item>
+        <item>FSC</item>
+        <item>BS</item>
+        <item>MS</item>
+        <item>PHD</item>
+        <item>DIPLOMA</item>
+        <item>Medical</item>
+        <item>Engineering</item>
+        <item>Arts</item>
+        <item>Science</item>
+        <item>Class 1 - 5</item>
+        <item>Class 6 - 8</item>
+        <item>Cooking</item>
+        <item>Religion</item>
+        <item>Others</item>
+    </string-array>
+
 </resources>
