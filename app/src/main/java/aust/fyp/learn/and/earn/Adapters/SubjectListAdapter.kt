@@ -1,11 +1,15 @@
 package aust.fyp.learn.and.earn.Adapters
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import aust.fyp.learn.and.earn.Activities.SubjectList
+import aust.fyp.learn.and.earn.Activities.TeacherList
 import aust.fyp.learn.and.earn.Models.EducationHistoryModel
 import aust.fyp.learn.and.earn.Models.SubjectModel
 import aust.fyp.learn.and.earn.R
@@ -13,9 +17,10 @@ import aust.fyp.learn.and.earn.R
 class SubjectListAdapter(var list: ArrayList<SubjectModel>) :
     RecyclerView.Adapter<SubjectListAdapter.myViewsHolder>() {
 
+    lateinit var context: Context
+
     class myViewsHolder(view: View) : RecyclerView.ViewHolder(view) {
         var subject_name: TextView = view.findViewById(R.id.subject_name)
-        var teacher_name: TextView = view.findViewById(R.id.teacher_name)
     }
 
     override fun onCreateViewHolder(
@@ -29,6 +34,9 @@ class SubjectListAdapter(var list: ArrayList<SubjectModel>) :
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
+
+
+        context = view.context
         return myViewsHolder(view)
     }
 
@@ -37,7 +45,15 @@ class SubjectListAdapter(var list: ArrayList<SubjectModel>) :
     }
 
     override fun onBindViewHolder(holder: SubjectListAdapter.myViewsHolder, position: Int) {
-        holder.subject_name.setText("Title : " + list.get(position).subject_name)
-        holder.teacher_name.setText("Teacher : " + list.get(position).teacher_name)
+        holder.subject_name.setText(list.get(position).subject_name)
+
+        holder.itemView.setOnClickListener {
+            var intent = Intent(context, TeacherList::class.java)
+            intent.putExtra("category", list.get(position).category.trim().toLowerCase())
+            intent.putExtra("subject", list.get(position).subject_name.trim().toLowerCase())
+            context.startActivity(intent)
+        }
+
+
     }
 }

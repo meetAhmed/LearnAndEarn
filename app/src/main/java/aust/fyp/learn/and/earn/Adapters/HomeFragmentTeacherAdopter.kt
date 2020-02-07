@@ -29,7 +29,7 @@ class HomeFragmentTeacherAdopter(var list: ArrayList<SubjectModel>) :
         ): aust.fyp.learn.and.earn.Adapters.HomeFragmentTeacherAdopter.myViewsHolder {
             var view: View =
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.single_view_teacher_subject, null)
+                    .inflate(R.layout.single_view_teacher_own_subject, null)
 
             view.layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

@@ -26,12 +26,12 @@ import org.json.JSONObject
 class SubjectList : AppCompatActivity() {
 
     lateinit var category: String
-    lateinit var progressDialog: ProgressDialog
     lateinit var realm: Realm
     lateinit var realmList: RealmResults<SubjectModel>
     lateinit var list: ArrayList<SubjectModel>
     lateinit var adapter: SubjectListAdapter
     lateinit var recView: RecyclerView
+    var TAG = "SubjectList"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,6 @@ class SubjectList : AppCompatActivity() {
         supportActionBar!!.hide()
 
         category = intent.getStringExtra("category")
-        progressDialog = ProgressDialog(this)
         realm = Realm.getDefaultInstance()
 
         if (category == null) {
@@ -57,6 +56,8 @@ class SubjectList : AppCompatActivity() {
             .findAll()
         processList(realmList)
 
+        Log.i(TAG, category)
+
         realmList.addChangeListener { realmList ->
             processList(realmList)
         }
@@ -71,15 +72,25 @@ class SubjectList : AppCompatActivity() {
         adapter.notifyDataSetChanged()
         if (realmResults != null) {
             realmResults.forEach { model ->
-                list.add(model)
-                adapter.notifyDataSetChanged()
+                var isAlreadyPresent = false
+
+                Log.i(TAG, model.category + " " + model.subject_name)
+
+                list.forEach { listModel ->
+                    if ((listModel.subject_name.toLowerCase().equals(model.subject_name.toLowerCase()))) {
+                        isAlreadyPresent = true
+                    }
+                }
+
+                if (!isAlreadyPresent) {
+                    list.add(model)
+                    adapter.notifyDataSetChanged()
+                }
             }
         }
     }
 
     private fun fetchDataFromServer() {
-        progressDialog.setMessage("sending verification email")
-        progressDialog.show()
 
         var request = object : StringRequest(
             Request.Method.POST, URLs.FETCH_SUBJECT,
@@ -87,9 +98,7 @@ class SubjectList : AppCompatActivity() {
 
                 try {
 
-                    if (progressDialog != null && progressDialog.isShowing()) {
-                        progressDialog.dismiss()
-                    }
+                    Log.i(TAG, response)
 
                     var mainOb = JSONObject(response)
                     val error = mainOb.getBoolean("error")
@@ -108,17 +117,12 @@ class SubjectList : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     Log.i(LoginActivity.TAG, "exception : " + e);
-                    Dialogs.showMessage(this, Constants.error_message_exception)
+                    Dialogs.showMessage(this@SubjectList, Constants.error_message_exception)
                 }
-
-
             },
             Response.ErrorListener { error ->
-                if (progressDialog != null && progressDialog.isShowing()) {
-                    progressDialog.dismiss()
-                }
                 Log.i(LoginActivity.TAG, "error : " + error);
-                Dialogs.showMessage(this, Constants.error_message_volley)
+                Dialogs.showMessage(this@SubjectList, Constants.error_message_volley)
             }) {
             override fun getParams(): MutableMap<String, String> {
                 var map = HashMap<String, String>()

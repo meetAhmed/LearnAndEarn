@@ -10,22 +10,16 @@
         android:layout_margin="10dp"
         android:background="@drawable/filled_white"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/subject_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MSC"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <TextView
-            android:id="@+id/teacher_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="I have done msc"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:text="Data structure"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#555454"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

@@ -77,20 +77,25 @@ class AddNewSubject : AppCompatActivity() {
 
                             var model: SubjectModel =
                                 realm.createObject(
-                                    SubjectModel::class.java,
-                                    mainOb.getInt("insertId")
+                                    SubjectModel::class.java
                                 )
 
                             model.apply {
 
+                                ID = mainOb.getInt("insertId")
                                 subject_name = subject_name_str
                                 description = description_str
                                 price_per_month = price_per_month_str.toDouble()
-                                 userID = PreferenceManager.getInstance(applicationContext)!!.getUserId()
-                                category= category_spinner.selectedItem.toString().toLowerCase().trim()
-                                teacher_name=PreferenceManager.getInstance(applicationContext!!)!!.getUserName().toString()
+                                userID =
+                                    PreferenceManager.getInstance(applicationContext)!!.getUserId()
+                                category =
+                                    category_spinner.selectedItem.toString().toLowerCase().trim()
+                                teacher_name =
+                                    PreferenceManager.getInstance(applicationContext!!)!!.getUserName()
+                                        .toString()
 
-                                profile_addresss=PreferenceManager.getInstance(applicationContext!!)!!.getUserProfile()!!
+                                profile_addresss =
+                                    PreferenceManager.getInstance(applicationContext!!)!!.getUserProfile()!!
 
                             }
 
