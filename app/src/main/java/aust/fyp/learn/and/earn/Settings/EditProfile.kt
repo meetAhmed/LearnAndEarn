@@ -1,21 +1,19 @@
-package aust.fyp.learn.and.earn.Activities
+package aust.fyp.learn.and.earn.Settings
 
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
+import aust.fyp.learn.and.earn.Activities.LoginActivity
 import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
 import aust.fyp.learn.and.earn.R
 import aust.fyp.learn.and.earn.StoreRoom.*
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
-import kotlinx.android.synthetic.main.single_view.*
 import org.json.JSONObject
 
 class EditProfile : AppCompatActivity() {

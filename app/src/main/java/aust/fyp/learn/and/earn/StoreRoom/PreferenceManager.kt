@@ -43,7 +43,6 @@ class PreferenceManager private constructor() {
     }
 
 
-
     fun isUserActive(): Boolean {
         return pref.getBoolean(Constants.USER_ACTIVE, false)
     }
@@ -128,4 +127,5 @@ class PreferenceManager private constructor() {
     fun getAccountStatus(): String? {
         return pref.getString(Constants.USER_STAUS, Constants.UNDEFINED)
     }
+
 }

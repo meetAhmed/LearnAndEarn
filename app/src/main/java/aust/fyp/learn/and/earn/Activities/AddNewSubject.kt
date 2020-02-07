@@ -1,16 +1,14 @@
 package aust.fyp.learn.and.earn.Activities
 
 import android.app.ProgressDialog
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
-import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
-import aust.fyp.learn.and.earn.Models.AddSubjectModel
-import aust.fyp.learn.and.earn.Models.EducationHistoryModel
+import aust.fyp.learn.and.earn.Models.SubjectModel
 import aust.fyp.learn.and.earn.R
 import aust.fyp.learn.and.earn.StoreRoom.*
 import com.android.volley.Request
@@ -21,15 +19,19 @@ import org.json.JSONObject
 
 class AddNewSubject : AppCompatActivity() {
 
-    lateinit var subject_name : EditText
-    lateinit var description : EditText
-    lateinit var price_per_month :EditText
+    lateinit var subject_name: EditText
+    lateinit var description: EditText
+    lateinit var price_per_month: EditText
     lateinit var progressDialog: ProgressDialog
+    lateinit var category_spinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_subject)
 
+        supportActionBar!!.hide()
+
+        category_spinner = findViewById(R.id.category)
         subject_name = findViewById(R.id.subject_name)
         description = findViewById(R.id.description)
         price_per_month = findViewById(R.id.price_per_month)
@@ -37,10 +39,9 @@ class AddNewSubject : AppCompatActivity() {
         progressDialog.setCancelable(false)
 
 
-
     }
 
-    fun save(view : View){
+    fun save(view: View) {
 
         progressDialog.setMessage("your subject is adding ")
         progressDialog.show()
@@ -65,26 +66,32 @@ class AddNewSubject : AppCompatActivity() {
                         Dialogs.showMessage(this, message)
                     } else {
 
-                        var subject_name_str =subject_name.text.toString().trim()
-                        var description_str =description.text.toString().trim()
-                        var price_per_month_str =price_per_month.text.toString().trim()
+                        var subject_name_str = subject_name.text.toString().trim()
+                        var description_str = description.text.toString().trim()
+                        var price_per_month_str = price_per_month.text.toString().trim()
+
 
 
 
                         Realm.getDefaultInstance().executeTransaction { realm ->
 
-                            var model: AddSubjectModel =
+                            var model: SubjectModel =
                                 realm.createObject(
-                                    AddSubjectModel::class.java,
+                                    SubjectModel::class.java,
                                     mainOb.getInt("insertId")
                                 )
 
                             model.apply {
-                                userID =
-                                    PreferenceManager.getInstance(applicationContext!!)!!.getUserId()
+
                                 subject_name = subject_name_str
                                 description = description_str
-                                price_per_month = price_per_month_str
+                                price_per_month = price_per_month_str.toDouble()
+                                 userID = PreferenceManager.getInstance(applicationContext)!!.getUserId()
+                                category= category_spinner.selectedItem.toString().toLowerCase().trim()
+                                teacher_name=PreferenceManager.getInstance(applicationContext!!)!!.getUserName().toString()
+
+                                profile_addresss=PreferenceManager.getInstance(applicationContext!!)!!.getUserProfile()!!
+
                             }
 
                             realm.insert(model)
@@ -113,7 +120,7 @@ class AddNewSubject : AppCompatActivity() {
                     PreferenceManager.getInstance(applicationContext)!!.getUserId().toString()
                 map["subject_name"] = subject_name.text.toString().trim()
                 map["price_per_month"] = price_per_month.text.toString().trim()
-
+                map["category"] = category_spinner.selectedItem.toString().toLowerCase().trim()
                 return map
             }
         }
@@ -121,5 +128,5 @@ class AddNewSubject : AppCompatActivity() {
         RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
 
     }
-    }
+}
 

@@ -1,32 +1,19 @@
 package aust.fyp.learn.and.earn.StoreRoom
 
 import android.graphics.Bitmap
-
+import aust.fyp.learn.and.earn.Models.CategoryModel
+import aust.fyp.learn.and.earn.R
 
 object Store {
 
-    fun resizeImage(image: Bitmap?): Bitmap? {
-        var image: Bitmap? = image ?: return null
-        val maxWidth = 1200
-        val maxHeight = 1200
-        return if (maxHeight > 0 && maxWidth > 0) {
-            val width = image!!.width
-            val height = image!!.height
-            val ratioBitmap = width.toFloat() / height.toFloat()
-            val ratioMax = maxWidth.toFloat() / maxHeight.toFloat()
-            var finalWidth = maxWidth
-            var finalHeight = maxHeight
-            if (ratioMax > ratioBitmap) {
-                finalWidth = (maxHeight.toFloat() * ratioBitmap).toInt()
-            } else {
-                finalHeight = (maxWidth.toFloat() / ratioBitmap).toInt()
-            }
-            image = Bitmap.createScaledBitmap(image!!, finalWidth, finalHeight, true)
-            image
-        } else {
-            image
-        }
-    } // function ends here
-
+    fun getCategories(): ArrayList<CategoryModel> {
+        var list = ArrayList<CategoryModel>()
+        list.add(CategoryModel("MATRIC", R.drawable.matric))
+        list.add(CategoryModel("FSC", R.drawable.fsc))
+        list.add(CategoryModel("BS", R.drawable.bs))
+        list.add(CategoryModel("MS", R.drawable.ms))
+        list.add(CategoryModel("Others", R.drawable.filled_grey))
+        return list
+    }
 
 }

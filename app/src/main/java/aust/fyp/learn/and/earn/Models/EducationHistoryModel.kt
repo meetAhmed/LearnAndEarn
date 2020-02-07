@@ -13,4 +13,5 @@ open class EducationHistoryModel() : RealmObject() {
     var degree_title: String = ""
     var description: String = ""
 
+
 }

@@ -23,6 +23,7 @@ object Dialogs {
         alert.show()
     }
 
+
     fun showMessage(
         activity: Activity,
         message: String

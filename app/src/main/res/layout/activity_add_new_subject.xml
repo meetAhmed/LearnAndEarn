@@ -22,81 +22,122 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_border"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="3dp"
-            android:paddingBottom="3dp">
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/subject_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Subject Title"
-                android:inputType="textMultiLine"
-                app:met_floatingLabel="highlight"
-                app:met_hideUnderline="true" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_border"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="3dp"
-            android:paddingBottom="3dp">
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Description"
-                android:inputType="textMultiLine"
-                app:met_floatingLabel="highlight"
-                app:met_hideUnderline="true" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_border"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="3dp"
-            android:paddingBottom="3dp">
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/price_per_month"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Price Per month is Rupees"
-                android:inputType="textMultiLine"
-                app:met_floatingLabel="highlight"
-                app:met_hideUnderline="true" />
-
-        </LinearLayout>
-
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/filled_light_green"
-            android:onClick="save"
-            android:text="SAVE"
-            android:textColor="#fff"
+            android:text="Add New Education History"
+            android:textColor="#00BFA5"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Select Category" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/bg_border"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="3dp">
+
+                <Spinner
+                    android:id="@+id/category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/categories"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_border"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="3dp">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/subject_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Subject Title"
+                    android:inputType="textMultiLine"
+                    app:met_floatingLabel="highlight"
+                    app:met_hideUnderline="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_border"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="3dp">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Description"
+                    android:inputType="textMultiLine"
+                    app:met_floatingLabel="highlight"
+                    app:met_hideUnderline="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_border"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="3dp">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/price_per_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Price Per month is Rupees"
+                    android:inputType="textMultiLine"
+                    app:met_floatingLabel="highlight"
+                    app:met_hideUnderline="true" />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/filled_light_green"
+                android:onClick="save"
+                android:text="SAVE"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
 </LinearLayout>
