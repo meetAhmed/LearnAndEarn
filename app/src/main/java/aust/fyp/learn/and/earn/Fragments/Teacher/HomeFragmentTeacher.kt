@@ -86,7 +86,7 @@ class HomeFragmentTeacher : Fragment() {
         }
     }
 
-    fun addNewRecord(view: View) {
+    fun addSubject(view: View) {
         startActivity(Intent(context, AddNewSubject::class.java))
     }
 
