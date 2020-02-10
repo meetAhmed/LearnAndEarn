@@ -25,16 +25,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Data structure"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#03A9F4"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="3"
             android:text="I have expert of this course this courese timeperiod is2 months .after 2 month you have full comond on it"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
         <TextView
             android:id="@+id/price_per_month"
             android:layout_width="wrap_content"
@@ -42,9 +46,9 @@
             android:layout_gravity="end"
             android:layout_marginTop="10dp"
             android:text="$40 "
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#1EAFA1"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textStyle="bold" />
 
 
     </LinearLayout>

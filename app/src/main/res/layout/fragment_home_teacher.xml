@@ -6,13 +6,49 @@
     android:orientation="vertical"
     android:padding="12dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#00BFA5"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.5"
+            android:text="Subjects"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#00BFA5"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/addSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/filled_light_green"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:text="Add"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,19 +59,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addSubject"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="10dp"
-            android:background="@drawable/filled_light_blue"
-            android:padding="10dp"
-            android:text="Add New Subject"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#fff"
-            android:textStyle="bold" />
 
     </FrameLayout>
 

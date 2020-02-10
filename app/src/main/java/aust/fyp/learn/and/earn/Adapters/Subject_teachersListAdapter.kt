@@ -75,7 +75,7 @@ class Subject_teachersListAdapter(var list: ArrayList<SubjectModel>) :
             intent.putExtra("userID", list.get(position).userID)
             intent.putExtra("category", list.get(position).category)
             intent.putExtra("teacher_name", list.get(position).teacher_name)
-            intent.putExtra("profile_addresss", list.get(position).profile_addresss)
+            intent.putExtra("profile_address", list.get(position).profile_addresss)
             context.startActivity(intent)
 
         }

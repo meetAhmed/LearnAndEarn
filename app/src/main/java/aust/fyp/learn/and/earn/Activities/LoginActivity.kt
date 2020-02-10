@@ -18,6 +18,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import io.realm.Realm
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
@@ -39,6 +40,11 @@ class LoginActivity : AppCompatActivity() {
 
         progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
+
+
+        Realm.getDefaultInstance().executeTransaction { realm ->
+            realm.deleteAll()
+        }
 
         if (PreferenceManager.getInstance(applicationContext)!!.isUserActive()) {
             if (PreferenceManager.getInstance(applicationContext)!!.getAccountStatus()!!.trim().equals(

@@ -1,8 +1,10 @@
 package aust.fyp.learn.and.earn.Activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -24,51 +26,57 @@ import org.json.JSONObject
 class TeacherDetailsActivity : AppCompatActivity() {
 
     lateinit var profile_image: ImageView
-    lateinit var teacher_name: String
-    lateinit var price_per_month:String
-    lateinit var subject_name:String
-    lateinit var description:String
-    lateinit var employmenthistory:TextView
-    lateinit var educationhistory:TextView
+    lateinit var teacher_name: TextView
+    lateinit var price_per_month: TextView
+    lateinit var subject_name: TextView
+    lateinit var description: TextView
+    lateinit var employmenthistory: TextView
+    lateinit var educationhistory: TextView
     lateinit var realm: Realm
     lateinit var realmList: RealmResults<EducationHistoryModel>
     lateinit var list: ArrayList<EducationHistoryModel>
     lateinit var adapter: EducationListAdapter
 
-    lateinit var employment_history:RecyclerView
-    lateinit var education_history:RecyclerView
+    lateinit var employment_history: RecyclerView
+    lateinit var education_history: RecyclerView
     var TAG = "TeacherDetailAcitvity"
-
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher_details)
 
+        supportActionBar!!.hide()
 
         profile_image = findViewById(R.id.profile_image)
-        teacher_name = intent.getStringExtra("teacher_name")
-        price_per_month = intent.getStringExtra("price_per_month")
-        description = intent.getStringExtra("description")
+
+        teacher_name = findViewById(R.id.teacher_name)
+        price_per_month = findViewById(R.id.price_per_month)
+        description = findViewById(R.id.description)
+        profile_image = findViewById(R.id.profile_image)
+
+        teacher_name.setText(intent.getStringExtra("teacher_name"))
+        price_per_month.setText("$ " + intent.getDoubleExtra("price_per_month", 0.0).toString())
+        description.setText(intent.getStringExtra("description"))
+
         employmenthistory = findViewById(R.id.employmenthistory)
         educationhistory = findViewById(R.id.educationhistory)
         employment_history = findViewById(R.id.employment_history)
         education_history = findViewById(R.id.education_history)
+
         employment_history.layoutManager = LinearLayoutManager(this)
         education_history.layoutManager = LinearLayoutManager(this)
+
         realm = Realm.getDefaultInstance()
         list = ArrayList<EducationHistoryModel>()
         adapter = EducationListAdapter(list)
 
         Picasso.get()
-            .load(URLs.getImageUrl(PreferenceManager.getInstance(this!!)!!.getUserProfile()))
+            .load(URLs.getImageUrl(intent.getStringExtra("profile_address")))
             .into(profile_image)
 
-
         realmList = realm.where(EducationHistoryModel::class.java)
-            .equalTo("userID", PreferenceManager.getInstance(applicationContext!!)!!.getUserId())
+            .equalTo("userID", intent.getIntExtra("userID", 0))
             .findAll()
         processList(realmList)
 
@@ -80,6 +88,7 @@ class TeacherDetailsActivity : AppCompatActivity() {
 
         fetchRecordsFromServer()
     }
+
     fun processList(realmResults: RealmResults<EducationHistoryModel>) {
         list.clear()
         adapter.notifyDataSetChanged()
@@ -90,6 +99,7 @@ class TeacherDetailsActivity : AppCompatActivity() {
             }
         }
     }
+
     fun fetchRecordsFromServer() {
 
         var request = object : StringRequest(
@@ -143,8 +153,7 @@ class TeacherDetailsActivity : AppCompatActivity() {
             }) {
             override fun getParams(): MutableMap<String, String> {
                 var map = HashMap<String, String>()
-                map["userID"] =
-                    PreferenceManager.getInstance(applicationContext!!)!!.getUserId().toString()
+                map["userID"] = intent.getIntExtra("userID", 0).toString()
                 return map
             }
         }
@@ -152,9 +161,14 @@ class TeacherDetailsActivity : AppCompatActivity() {
         RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
     }
 
-
-
-
-
+    fun open_checkout(view: View) {
+        var intent_to = Intent(this, CheckoutActivity::class.java)
+        intent_to.putExtra("ID", intent.getIntExtra("ID", 0))
+        intent_to.putExtra("subject_name", intent.getStringExtra("subject_name"))
+        intent_to.putExtra("price_per_month", intent.getDoubleExtra("price_per_month", 0.0))
+        intent_to.putExtra("teacher_name", intent.getStringExtra("teacher_name"))
+        startActivity(intent_to)
     }
+
+}
 

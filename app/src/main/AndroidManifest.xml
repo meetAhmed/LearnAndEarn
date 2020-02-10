@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.TeacherDetailsActivity"></activity>
+        <activity android:name=".Activities.CheckoutActivity"></activity>
+        <activity android:name=".Activities.TeacherDetailsActivity" />
         <activity android:name=".Activities.SubjectList" />
         <activity android:name=".Activities.AddNewSubject" />
         <activity android:name=".Settings.AddEducationHistory" />

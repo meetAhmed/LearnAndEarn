@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -61,7 +62,7 @@ class HomeFragmentTeacher : Fragment() {
     ): View? {
         var view = inflater.inflate(R.layout.fragment_home_teacher, container, false)
 
-        view.findViewById<Button>(R.id.addSubject).setOnClickListener {
+        view.findViewById<TextView>(R.id.addSubject).setOnClickListener {
             startActivity(Intent(activity, AddNewSubject::class.java))
         }
 

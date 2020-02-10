@@ -81,6 +81,57 @@
                 android:layout_marginTop="10dp"
                 android:background="#B5CECECE" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/ic_message_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chat"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="open_checkout"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/money" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Buy now"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/subject_name"
                 android:layout_width="wrap_content"
@@ -116,10 +167,10 @@ I want a list of items in which I want to perform a search. I want items to be f
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/employmenthistory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/employmenthistory"
                     android:text="Employment History"
                     android:textStyle="bold" />
 
@@ -133,16 +184,16 @@ I want a list of items in which I want to perform a search. I want items to be f
 
             <LinearLayout
                 android:id="@+id/education_history_view"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/educationhistory"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/educationhistory"
                     android:text="Education History"
                     android:textStyle="bold" />
 
