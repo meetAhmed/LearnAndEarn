@@ -21,6 +21,11 @@ object URLs {
     val ADD_EDUCATION_HISTORY = PROTOCOL + IP_ADDRESS + PORT + "/education/history/add"
     val FETCH_RECORDS = PROTOCOL + IP_ADDRESS + PORT + "/education/history/read"
 
+    //employmnet/histroy
+    val ADD_EMPLOYMENT_HISTORY = PROTOCOL + IP_ADDRESS + PORT + "/employmnet/history/add"
+    val FETCH_EMPLOYMNET_RECORDS = PROTOCOL + IP_ADDRESS + PORT + "/employmnet/history/read"
+
+
     //add new subject
     val SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/add"
     val FETCH_SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/read"

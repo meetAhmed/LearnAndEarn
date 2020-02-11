@@ -15,6 +15,7 @@ import aust.fyp.learn.and.earn.Settings.EditProfile
 import aust.fyp.learn.and.earn.R
 import aust.fyp.learn.and.earn.Settings.ChangeProfilePicture
 import aust.fyp.learn.and.earn.Settings.EducationHistory
+import aust.fyp.learn.and.earn.Settings.EmploymnetHistroy
 import aust.fyp.learn.and.earn.StoreRoom.Constants
 import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
 import aust.fyp.learn.and.earn.StoreRoom.URLs
@@ -49,6 +50,12 @@ class SettingsFragment : Fragment() {
                 Intent(context, EditProfile::class.java)
             )
         }
+        layoutView.findViewById<LinearLayout>(R.id.manage_employment_history).setOnClickListener {
+            startActivity(
+                Intent(context,EmploymnetHistroy::class.java)
+            )
+        }
+
 
         layoutView.findViewById<LinearLayout>(R.id.change_profile_picture).setOnClickListener {
             startActivity(Intent(context, ChangeProfilePicture::class.java))
