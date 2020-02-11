@@ -118,7 +118,7 @@ class CheckoutActivity : AppCompatActivity() {
             }) {
             override fun getParams(): MutableMap<String, String> {
                 var map = HashMap<String, String>()
-                map["stripe_token"] = token.toString()
+                map["stripe_token"] = token.id
                 map["student_id"] =
                     PreferenceManager.getInstance(applicationContext!!)!!.getUserId().toString()
                 map["student_email"] =

@@ -170,5 +170,11 @@ class TeacherDetailsActivity : AppCompatActivity() {
         startActivity(intent_to)
     }
 
+    fun open_chat(view: View) {
+        var intent_to = Intent(this, ChatActivity::class.java)
+        intent_to.putExtra("ID", intent.getIntExtra("ID", 0))
+        intent_to.putExtra("teacher_name", intent.getStringExtra("teacher_name"))
+        startActivity(intent_to)
+    }
 }
 
