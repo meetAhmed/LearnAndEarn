@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="app_divider_color">#BBBBBB</color>
+
+    <color name="colorTextBlack">#333333</color>
+    <color name="colorTextHint">#e1e1e1</color>
+    <color name="colorTextInfo">#9b9b9b</color>
 </resources>

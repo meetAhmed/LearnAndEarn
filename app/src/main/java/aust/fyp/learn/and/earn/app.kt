@@ -17,7 +17,7 @@ class app : Application() {
                 .build()
         Realm.setDefaultConfiguration(config)
 
-        SocketConnectionHandler.init()
+        SocketConnectionHandler.init(this)
 
     }
 

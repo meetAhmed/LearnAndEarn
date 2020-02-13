@@ -1,84 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    android:padding="12dp"
-    android:weightSum="10">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#E9EDED"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingLeft="@dimen/space10"
+        android:paddingTop="@dimen/space5"
+        android:paddingRight="@dimen/space5"
+        android:paddingBottom="@dimen/space5">
+
+        <Button
+            android:id="@+id/bt_send"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/filled_ligt_orange"
+            android:gravity="center"
+            android:onClick="sendMessage"
+            android:stateListAnimator="@null"
+            android:text="Send"
+            android:textColor="#fff" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@id/bt_send"
+            android:background="@drawable/bg_white_rounded">
+
+            <EditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Enter your message"
+                android:inputType="textMultiLine"
+                android:maxLines="3"
+                android:padding="@dimen/space15"
+                android:textColor="@color/colorTextBlack"
+                android:textColorHint="@color/colorTextHint" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rl_bottom"
+        android:layout_below="@id/bar"
+        android:padding="7dp"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
         android:weightSum="10">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:ellipsize="end"
             android:id="@+id/receiver_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:maxLines="1"
-            android:text="Teacher Name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#00BFA5"
             android:textStyle="bold" />
-    </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recView"
+        <TextView
+            android:id="@+id/status"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#4BC2BFBF"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:weightSum="10">
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/message"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="8.8"
-            android:hint="Enter Your Message"
-            app:met_hideUnderline="true" />
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="status"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="#EE9B9E9E"
+            android:textStyle="bold" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:onClick="send_message"
-                android:src="@drawable/send"
-                android:tint="#00B8D4" />
-
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="#E9EDED" />
 
     </LinearLayout>
 
-</LinearLayout>
+
+</RelativeLayout>

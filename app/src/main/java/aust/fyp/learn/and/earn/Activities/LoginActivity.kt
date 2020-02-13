@@ -41,11 +41,6 @@ class LoginActivity : AppCompatActivity() {
         progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
 
-
-        Realm.getDefaultInstance().executeTransaction { realm ->
-            realm.deleteAll()
-        }
-
         if (PreferenceManager.getInstance(applicationContext)!!.isUserActive()) {
             if (PreferenceManager.getInstance(applicationContext)!!.getAccountStatus()!!.trim().equals(
                     "unverified"
@@ -176,6 +171,10 @@ class LoginActivity : AppCompatActivity() {
 
         progressDialog.setMessage("checking account")
         progressDialog.show()
+
+        Realm.getDefaultInstance().executeTransaction { realm ->
+            realm.deleteAll()
+        }
 
         var request = object : StringRequest(
             Request.Method.POST, URLs.LOGIN,

@@ -3,6 +3,7 @@ package aust.fyp.learn.and.earn.StoreRoom
 import android.graphics.Bitmap
 import aust.fyp.learn.and.earn.Models.CategoryModel
 import aust.fyp.learn.and.earn.R
+import java.text.SimpleDateFormat
 
 object Store {
 
@@ -14,6 +15,10 @@ object Store {
         list.add(CategoryModel("MS", R.drawable.ms))
         list.add(CategoryModel("Others", R.drawable.filled_grey))
         return list
+    }
+
+    fun getTime(time: Long): String {
+        return SimpleDateFormat("EEE, d-MMM-yyyy ' at ' h:mm a").format(time)
     }
 
 }

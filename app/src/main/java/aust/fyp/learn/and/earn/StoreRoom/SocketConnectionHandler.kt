@@ -19,8 +19,12 @@ class SocketConnectionHandler private constructor() {
         private var TAG = "SocketConnectionHandler"
         private var context: Context? = null
 
-        fun init() {
+        fun init(ctx: Context) {
+
             if (INSTANCE == null) {
+
+                context = ctx
+
                 socket = IO.socket(URLs.PROTOCOL + URLs.IP_ADDRESS + URLs.PORT)
                 socket!!.connect()
                 INSTANCE = SocketConnectionHandler()
@@ -28,22 +32,24 @@ class SocketConnectionHandler private constructor() {
                 try {
 
                     var json = JSONObject()
-                    
+                    json.put("userID", PreferenceManager.getInstance(context!!)!!.getUserId())
+                    json.put("user_name", PreferenceManager.getInstance(context!!)!!.getUserName())
+
+                    socket!!.emit("join", json)
+
                     socket!!.on("ping", { args ->
                         var data = args[0] as JSONObject
                         Log.i(TAG, "{$data}")
 
-
-
-
-                        socket!!.emit("pong", json, Emitter.Listener { args ->
+                        socket!!.emit("pong", json, Ack { args ->
                             var data = args[0] as JSONObject
                             Log.i(TAG, "{$data}")
+
                         })
                     })
 
                 } catch (e: Exception) {
-
+                    Log.i(TAG, "Exception: ${e}")
                 }
             }
         }
