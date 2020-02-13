@@ -1,9 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settings.AddEmploymentHistroy">
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Employment Histroy"
+        android:textColor="#00BFA5"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_border"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="3dp"
+            android:paddingBottom="3dp">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/work_as_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Work As "
+                android:inputType="textMultiLine"
+                app:met_floatingLabel="highlight"
+                app:met_hideUnderline="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_border"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="3dp"
+            android:paddingBottom="3dp">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/organization_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Organization Name"
+                android:inputType="textMultiLine"
+                app:met_floatingLabel="highlight"
+                app:met_hideUnderline="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_border"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="3dp"
+            android:paddingBottom="3dp">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/experience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Experience"
+                android:inputType="textMultiLine"
+                app:met_floatingLabel="highlight"
+                app:met_hideUnderline="true" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/filled_light_green"
+            android:onClick="save"
+            android:text="SAVE"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
