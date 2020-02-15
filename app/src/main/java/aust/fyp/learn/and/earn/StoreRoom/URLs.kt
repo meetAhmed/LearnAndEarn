@@ -34,6 +34,10 @@ object URLs {
     // payment
     val PAY = PROTOCOL + IP_ADDRESS + PORT + "/payment/pay"
 
+    // message
+    val HEADS = PROTOCOL + IP_ADDRESS + PORT + "/message/heads"
+    val ALL_MESSAGES = PROTOCOL + IP_ADDRESS + PORT + "/message/read"
+
     fun getImageUrl(image_name: String?): String {
         return PROTOCOL + IP_ADDRESS + PORT + "/uploadedFiles/$image_name"
     }

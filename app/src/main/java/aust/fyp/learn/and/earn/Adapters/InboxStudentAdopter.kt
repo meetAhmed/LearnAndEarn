@@ -8,19 +8,19 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import aust.fyp.learn.and.earn.Activities.TeacherDetailsActivity
-import aust.fyp.learn.and.earn.Fragments.Student.InboxFragmentStudent
-import aust.fyp.learn.and.earn.Models.MessageModel
+import aust.fyp.learn.and.earn.Activities.ChatActivity
+import aust.fyp.learn.and.earn.Models.ChatHeadModel
 import aust.fyp.learn.and.earn.R
 import aust.fyp.learn.and.earn.StoreRoom.Store
 
-class InboxStudentAdopter (var list: ArrayList<MessageModel>) : RecyclerView.Adapter<InboxStudentAdopter.myViewsHolder>() {
+class InboxStudentAdopter(var list: ArrayList<ChatHeadModel>, var currentUser: Int) :
+    RecyclerView.Adapter<InboxStudentAdopter.myViewsHolder>() {
 
     lateinit var context: Context
 
     class myViewsHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        var sender_name: TextView = view.findViewById(R.id.sender_name)
+        var user_name: TextView = view.findViewById(R.id.receiver_name)
         var message: TextView = view.findViewById(R.id.message)
         var date: TextView = view.findViewById(R.id.date)
 
@@ -50,20 +50,24 @@ class InboxStudentAdopter (var list: ArrayList<MessageModel>) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: InboxStudentAdopter.myViewsHolder, position: Int) {
-        holder.sender_name.setText( list.get(position).sender_name)
-        holder.message.setText( list.get(position).message)
+
+        if (currentUser == list.get(position).sender_id) {
+            holder.user_name.setText(list.get(position).receiver_name)
+        } else {
+            holder.user_name.setText(list.get(position).sender_name)
+        }
+
+        holder.message.setText(list.get(position).message)
         holder.date.setText(Store.getTime(list.get(position).date))
 
 
         holder.itemView.setOnClickListener {
-
-            var intent = Intent(context, InboxFragmentStudent::class.java)
-            intent.putExtra("sender_name", list.get(position).sender_name)
-            intent.putExtra("message", list.get(position).message)
-            intent.putExtra("date", list.get(position).date)
+            var intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra("receiver_name", holder.user_name.text.toString())
+            intent.putExtra("ID", list.get(position).receiver_id)
             context.startActivity(intent)
         }
-        }
+    }
 }
 
 
