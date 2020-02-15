@@ -62,5 +62,8 @@ class MessageAdapter(var list: ArrayList<MessageModel>, var current_user_id: Int
     override fun onBindViewHolder(holder: MessageAdapter.myViewsHolder, position: Int) {
         holder.messageText.setText(list.get(position).message)
         holder.messageTime.setText(Store.getTime(list.get(position).date))
+
+
+
     }
 }

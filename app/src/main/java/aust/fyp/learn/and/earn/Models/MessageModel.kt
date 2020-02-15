@@ -13,5 +13,7 @@ open class MessageModel() : RealmObject() {
     var receiver_id: Int = -99
     var message: String = ""
     var date: Long = 0L
+    var sender_name :String = ""
+    var receiver_name : String = ""
 
 }
