@@ -1,5 +1,9 @@
 package aust.fyp.learn.and.earn.Activities
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +11,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -39,6 +44,49 @@ class ChatActivity : AppCompatActivity() {
     lateinit var adapter: MessageAdapter
     lateinit var reload: SwipeRefreshLayout
 
+    var message_broadcast_receiver = object : BroadcastReceiver() {
+
+        override fun onReceive(p0: Context?, intent: Intent?) {
+
+            if (intent != null) {
+
+                var data = intent.getStringExtra("data")
+                try {
+
+                    var mainOb = JSONObject(data)
+                    if (!mainOb.getBoolean("error")) {
+
+                        if (realm != null) {
+                            realm.executeTransaction { realm ->
+                                var prev_model = realm.where(MessageModel::class.java)
+                                    .equalTo("ID", mainOb.getJSONObject("message_ob").getInt("ID"))
+                                    .findFirst()
+
+                                if (prev_model != null) {
+                                    prev_model.deleteFromRealm()
+                                }
+
+                                realm.createObjectFromJson(
+                                    MessageModel::class.java,
+                                    mainOb.getJSONObject("message_ob")
+                                )
+
+                            }
+                        }
+
+                    }
+
+                } catch (e: Exception) {
+                    Log.i(TAG, "exception: $e")
+                }
+
+            }
+
+        }
+
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -48,6 +96,13 @@ class ChatActivity : AppCompatActivity() {
         socket = SocketConnectionHandler.getDefaultSocket()
         realm = Realm.getDefaultInstance()
         receiver_id = intent!!.getIntExtra("ID", 0)
+
+
+        Log.i(TAG, "receiver_id: ${receiver_id}")
+        Log.i(
+            TAG,
+            "sender_id: ${PreferenceManager.getInstance(applicationContext!!)!!.getUserId()}"
+        )
 
         list = ArrayList()
         adapter =
@@ -97,6 +152,7 @@ class ChatActivity : AppCompatActivity() {
     private fun proccesModels(realmResults: RealmResults<MessageModel>?) {
         list.clear()
         adapter.notifyDataSetChanged()
+        Log.i(TAG, "proccesModels: ${realmResults!!.size}")
         if (realmResults != null) {
             realmResults.forEach { model ->
                 list.add(model)
@@ -203,12 +259,12 @@ class ChatActivity : AppCompatActivity() {
                         }
                     }
                 } catch (e: Exception) {
-                    Log.i(LoginActivity.TAG, "exception : " + e);
+                    Log.i(TAG, "exception : " + e);
                     Dialogs.showMessage(this@ChatActivity, Constants.error_message_exception)
                 }
             },
             Response.ErrorListener { error ->
-                Log.i(LoginActivity.TAG, "error : " + error);
+                Log.i(TAG, "error : " + error);
                 Dialogs.showMessage(this@ChatActivity, Constants.error_message_volley)
             }) {
             override fun getParams(): MutableMap<String, String> {
@@ -222,4 +278,19 @@ class ChatActivity : AppCompatActivity() {
         RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
 
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        LocalBroadcastManager.getInstance(applicationContext)
+            .registerReceiver(message_broadcast_receiver, IntentFilter(Constants.MESSAGE_RECEIVED))
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        LocalBroadcastManager.getInstance(applicationContext)
+            .unregisterReceiver(message_broadcast_receiver)
+    }
+
 }

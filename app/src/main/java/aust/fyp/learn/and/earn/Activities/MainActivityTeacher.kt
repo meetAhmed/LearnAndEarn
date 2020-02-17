@@ -12,6 +12,7 @@ import aust.fyp.learn.and.earn.Fragments.Teacher.ClassRoomFragmentTeacher
 import aust.fyp.learn.and.earn.Fragments.Teacher.HomeFragmentTeacher
 import aust.fyp.learn.and.earn.Fragments.Teacher.InboxFragmentTeacher
 import aust.fyp.learn.and.earn.Fragments.SettingsFragment
+import aust.fyp.learn.and.earn.Fragments.Student.InboxFragmentStudent
 import aust.fyp.learn.and.earn.R
 import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -35,7 +36,7 @@ class MainActivityTeacher : AppCompatActivity() {
 
         viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
         viewPagerAdapter.addFragment(HomeFragmentTeacher(), "Home")
-        viewPagerAdapter.addFragment(InboxFragmentTeacher(), "Inbox")
+        viewPagerAdapter.addFragment(InboxFragmentStudent(), "Inbox")
         viewPagerAdapter.addFragment(ClassRoomFragmentTeacher(), "Class Room")
         viewPagerAdapter.addFragment(SettingsFragment(), "Settings")
         viewPager.adapter = viewPagerAdapter

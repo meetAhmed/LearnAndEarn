@@ -2,7 +2,10 @@ package aust.fyp.learn.and.earn.StoreRoom
 
 import android.R.attr.data
 import android.content.Context
+import android.content.Intent
 import android.util.Log
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import aust.fyp.learn.and.earn.StoreRoom.Constants.MESSAGE_RECEIVED
 import com.github.nkzawa.emitter.Emitter
 import com.github.nkzawa.socketio.client.Ack
 import com.github.nkzawa.socketio.client.IO
@@ -46,6 +49,14 @@ class SocketConnectionHandler private constructor() {
                             Log.i(TAG, "{$data}")
 
                         })
+                    })
+
+                    socket!!.on("message-received", { args ->
+                        var data = args[0] as JSONObject
+                        Log.i(TAG, "{$data}")
+                        var intent = Intent(MESSAGE_RECEIVED)
+                        intent.putExtra("data", data.toString())
+                        LocalBroadcastManager.getInstance(context!!).sendBroadcast(intent)
                     })
 
                 } catch (e: Exception) {

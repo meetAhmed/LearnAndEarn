@@ -51,10 +51,14 @@ class InboxStudentAdopter(var list: ArrayList<ChatHeadModel>, var currentUser: I
 
     override fun onBindViewHolder(holder: InboxStudentAdopter.myViewsHolder, position: Int) {
 
+        var other_user_id = 0
+
         if (currentUser == list.get(position).sender_id) {
             holder.user_name.setText(list.get(position).receiver_name)
+            other_user_id = list.get(position).receiver_id
         } else {
             holder.user_name.setText(list.get(position).sender_name)
+            other_user_id = list.get(position).sender_id
         }
 
         holder.message.setText(list.get(position).message)
@@ -64,7 +68,7 @@ class InboxStudentAdopter(var list: ArrayList<ChatHeadModel>, var currentUser: I
         holder.itemView.setOnClickListener {
             var intent = Intent(context, ChatActivity::class.java)
             intent.putExtra("receiver_name", holder.user_name.text.toString())
-            intent.putExtra("ID", list.get(position).receiver_id)
+            intent.putExtra("ID",other_user_id)
             context.startActivity(intent)
         }
     }

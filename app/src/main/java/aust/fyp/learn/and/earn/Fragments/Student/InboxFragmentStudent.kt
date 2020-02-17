@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import aust.fyp.learn.and.earn.Adapters.InboxStudentAdopter
 import aust.fyp.learn.and.earn.Adapters.Subject_teachersListAdapter
 import aust.fyp.learn.and.earn.Models.ChatHeadModel
@@ -36,6 +37,7 @@ class InboxFragmentStudent : Fragment() {
     lateinit var realmList: RealmResults<ChatHeadModel>
     lateinit var list: ArrayList<ChatHeadModel>
     lateinit var adapter: InboxStudentAdopter
+    lateinit var reload: SwipeRefreshLayout
 
     var TAG = "InboxFragmentS"
 
@@ -82,6 +84,12 @@ class InboxFragmentStudent : Fragment() {
         recView = layoutView.findViewById(R.id.recView)
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = adapter
+
+        reload = layoutView.findViewById(R.id.reload)
+        reload.setOnRefreshListener {
+            reload.isRefreshing = false
+            fetchRecordsFromServer()
+        }
 
         return layoutView
 
