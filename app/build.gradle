@@ -21,6 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -49,4 +54,7 @@ dependencies {
 
     implementation 'com.stripe:stripe-android:8.7.0'
     implementation 'com.github.nkzawa:socket.io-client:0.6.0'
+    implementation 'com.opentok.android:opentok-android-sdk:2.16.3'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
 }
