@@ -8,7 +8,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import aust.fyp.learn.and.earn.Adapters.ViewPagerAdapter
-import aust.fyp.learn.and.earn.Fragments.Teacher.ClassRoomFragmentTeacher
 import aust.fyp.learn.and.earn.Fragments.Teacher.HomeFragmentTeacher
 import aust.fyp.learn.and.earn.Fragments.Teacher.InboxFragmentTeacher
 import aust.fyp.learn.and.earn.Fragments.SettingsFragment

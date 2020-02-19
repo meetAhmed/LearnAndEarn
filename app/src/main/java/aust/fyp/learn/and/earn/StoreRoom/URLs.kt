@@ -30,9 +30,14 @@ object URLs {
     val SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/add"
     val FETCH_SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/read"
     val FETCH_SUBJECT_TEACHER = PROTOCOL + IP_ADDRESS + PORT + "/subject/read/teacher"
+    val STUDENT_REGISTERED_SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/fetchStudentRegistereSubjects"
+    val TEACHER_CLASS_STUDENTS = PROTOCOL + IP_ADDRESS + PORT + "/subject/fetchTeacherClassRoomStudents"
 
     // payment
     val PAY = PROTOCOL + IP_ADDRESS + PORT + "/payment/pay"
+
+    // token
+    val ADD_TOKEN = PROTOCOL + IP_ADDRESS + PORT + "/token/add"
 
     // message
     val HEADS = PROTOCOL + IP_ADDRESS + PORT + "/message/heads"

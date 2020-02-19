@@ -3,19 +3,63 @@ package aust.fyp.learn.and.earn.Fragments.Student
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import aust.fyp.learn.and.earn.Activities.VideoCall
+import aust.fyp.learn.and.earn.Adapters.StudentRegisteredCourseAdapter
+import aust.fyp.learn.and.earn.Models.StudentRegisteredCourses
+import aust.fyp.learn.and.earn.Models.SubjectModel
 
 import aust.fyp.learn.and.earn.R
+import aust.fyp.learn.and.earn.StoreRoom.*
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import io.realm.Realm
+import io.realm.RealmResults
+import org.json.JSONObject
 
-/**
- * A simple [Fragment] subclass.
- */
 class ClassRoomFragmentStudent : Fragment() {
+
+    var TAG = "ClassRoomFragmentStudent"
+    lateinit var realm: Realm
+    lateinit var recView: RecyclerView
+    lateinit var realmResults: RealmResults<StudentRegisteredCourses>
+    lateinit var list: ArrayList<StudentRegisteredCourses>
+    lateinit var adapter: StudentRegisteredCourseAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        realm = Realm.getDefaultInstance()
+        list = ArrayList()
+        adapter = StudentRegisteredCourseAdapter(list)
+        realmResults = realm.where(StudentRegisteredCourses::class.java).findAll()
+        processModels(realmResults)
+        realmResults.addChangeListener { realmResults ->
+            processModels(realmResults)
+        }
+
+        fetchRecordsFromServer()
+    }
+
+    private fun processModels(realmResults: RealmResults<StudentRegisteredCourses>?) {
+        list.clear()
+        adapter.notifyDataSetChanged()
+        if (realmResults != null) {
+            realmResults.forEach { model ->
+                list.add(model)
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,13 +68,58 @@ class ClassRoomFragmentStudent : Fragment() {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_class_room_fragment_student, container, false)
 
-        view.findViewById<Button>(R.id.startVideo).setOnClickListener {
-            startActivity(Intent(context, VideoCall::class.java))
-        }
-
+        recView = view.findViewById(R.id.recView)
+        recView.layoutManager = LinearLayoutManager(context)
 
 
         return view
+    }
+
+    fun fetchRecordsFromServer() {
+
+        var request = object : StringRequest(
+            Request.Method.POST, URLs.STUDENT_REGISTERED_SUBJECT,
+            Response.Listener { response ->
+                try {
+                    Log.i(TAG, "response : $response")
+                    var mainOb = JSONObject(response)
+                    val error = mainOb.getBoolean("error")
+
+                    if (error) {
+                        // error
+                        Toast.makeText(
+                            context,
+                            mainOb.getString("message"),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+
+                        var jsonArray = mainOb.getJSONArray("data")
+
+                        realm.executeTransaction { realm ->
+                            realm.delete(StudentRegisteredCourses::class.java)
+                            realm.createAllFromJson(StudentRegisteredCourses::class.java, jsonArray)
+                        }
+
+                    }
+                } catch (e: Exception) {
+                    Log.i(TAG, "exception : $e")
+                    Dialogs.showMessage(activity!!, Constants.error_message_exception)
+                }
+            },
+            Response.ErrorListener { error ->
+                Log.i(TAG, "error : $error")
+                Dialogs.showMessage(activity!!, Constants.error_message_volley)
+            }) {
+            override fun getParams(): MutableMap<String, String> {
+                var map = HashMap<String, String>()
+                map["student_id"] =
+                    PreferenceManager.getInstance(context!!)!!.getUserId().toString()
+                return map
+            }
+        }
+
+        RequestHandler.getInstance(context!!)!!.addToRequestQueue(request)
     }
 
 

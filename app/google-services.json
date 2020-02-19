@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "763582267633",
+    "firebase_url": "https://learn-and-earn-c0f2a.firebaseio.com",
+    "project_id": "learn-and-earn-c0f2a",
+    "storage_bucket": "learn-and-earn-c0f2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763582267633:android:77577a38d95b7b2e74e950",
+        "android_client_info": {
+          "package_name": "aust.fyp.learn.and.earn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763582267633-ioide64art9rgn0f0dli6tg0q8tus1oh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDcwWKfDnBJRpLNo2Vo60QviZqyzwlWIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763582267633-ioide64art9rgn0f0dli6tg0q8tus1oh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

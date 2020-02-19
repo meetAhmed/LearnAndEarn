@@ -40,7 +40,7 @@ class SocketConnectionHandler private constructor() {
 
                     socket!!.emit("join", json)
 
-                    socket!!.on("ping", { args ->
+                    socket!!.on("ping"){ args ->
                         var data = args[0] as JSONObject
                         Log.i(TAG, "{$data}")
 
@@ -49,15 +49,15 @@ class SocketConnectionHandler private constructor() {
                             Log.i(TAG, "{$data}")
 
                         })
-                    })
+                    }
 
-                    socket!!.on("message-received", { args ->
+                    socket!!.on("message-received"){ args ->
                         var data = args[0] as JSONObject
                         Log.i(TAG, "{$data}")
                         var intent = Intent(MESSAGE_RECEIVED)
                         intent.putExtra("data", data.toString())
                         LocalBroadcastManager.getInstance(context!!).sendBroadcast(intent)
-                    })
+                    }
 
                 } catch (e: Exception) {
                     Log.i(TAG, "Exception: ${e}")
