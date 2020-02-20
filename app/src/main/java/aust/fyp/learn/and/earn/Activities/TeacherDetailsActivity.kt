@@ -167,6 +167,7 @@ class TeacherDetailsActivity : AppCompatActivity() {
         intent_to.putExtra("subject_name", intent.getStringExtra("subject_name"))
         intent_to.putExtra("price_per_month", intent.getDoubleExtra("price_per_month", 0.0))
         intent_to.putExtra("teacher_name", intent.getStringExtra("teacher_name"))
+        intent_to.putExtra("teacher_id", intent.getIntExtra("userID", 0))
         startActivity(intent_to)
     }
 

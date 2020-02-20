@@ -121,12 +121,18 @@ class CheckoutActivity : AppCompatActivity() {
                 map["stripe_token"] = token.id
                 map["student_id"] =
                     PreferenceManager.getInstance(applicationContext!!)!!.getUserId().toString()
+                map["student_name"] =
+                    PreferenceManager.getInstance(applicationContext!!)!!.getUserName().toString()
                 map["student_email"] =
                     PreferenceManager.getInstance(applicationContext!!)!!.getUserEmail().toString()
                 map["subject_id"] = subject_id.toString()
                 map["amount"] = intent.getDoubleExtra(
                     "price_per_month",
                     0.0
+                ).toString()
+                map["teacher_id"] = intent.getIntExtra(
+                    "teacher_id",
+                    0
                 ).toString()
                 return map
             }

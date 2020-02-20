@@ -15,7 +15,15 @@ import aust.fyp.learn.and.earn.Fragments.Student.ClassRoomFragmentTeacher
 import aust.fyp.learn.and.earn.Fragments.Student.InboxFragmentStudent
 import aust.fyp.learn.and.earn.R
 import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
+import aust.fyp.learn.and.earn.StoreRoom.RequestHandler
+import aust.fyp.learn.and.earn.StoreRoom.URLs
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.iid.FirebaseInstanceId
+import org.json.JSONObject
 
 class MainActivityTeacher : AppCompatActivity() {
 
@@ -24,6 +32,7 @@ class MainActivityTeacher : AppCompatActivity() {
     lateinit var viewPagerAdapter: ViewPagerAdapter
     var currentFragment = "home"
     var previousItem: MenuItem? = null
+    var TAG = "MainActivityTeacher"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +108,54 @@ class MainActivityTeacher : AppCompatActivity() {
             }
             true
         }
+        getToken()
     }
+
+    fun getToken() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                val token = task.result?.token
+                uploadToken(token)
+
+            })
+    }
+
+    fun uploadToken(token: String?) {
+        var request = object : StringRequest(
+            Request.Method.POST, URLs.ADD_TOKEN,
+            Response.Listener { response ->
+
+                try {
+
+                    var mainOb = JSONObject(response)
+                    Log.i(TAG, mainOb.toString())
+                } catch (e: Exception) {
+                    Log.i(TAG, "exception : " + e);
+                }
+
+
+            },
+            Response.ErrorListener { error ->
+                Log.i(TAG, "error : " + error);
+            }) {
+            override fun getParams(): MutableMap<String, String> {
+                var map = HashMap<String, String>()
+                map["token"] = token!!
+                map["userID"] =
+                    PreferenceManager.getInstance(applicationContext!!)!!.getUserId().toString()
+                return map
+            }
+        }
+
+        RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
+    }
+
 
     override fun onBackPressed() {
         if (currentFragment.equals("home")) {
