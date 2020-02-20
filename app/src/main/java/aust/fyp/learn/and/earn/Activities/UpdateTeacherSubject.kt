@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
 import aust.fyp.learn.and.earn.R
 import aust.fyp.learn.and.earn.StoreRoom.*
@@ -36,13 +37,19 @@ class UpdateTeacherSubject : AppCompatActivity() {
         price_per_month = findViewById(R.id.price_per_month)
         progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
-        subject_name= intent.getStringArrayExtra("subject_name")
-        description = intent.getStringExtra("description")
-        category = intent.getStringExtra("category")
-        price_per_month = intent.getStringExtra("price_per_month")
 
-        category.selectedItem.toString().toLowerCase().trim()
 
+        subject_name.setText(intent.getStringExtra("subject_name"))
+        description.setText(intent.getStringExtra("description"))
+        price_per_month.setText(intent.getStringExtra("price_per_month"))
+
+    var category_array = resources.getStringArray(R.array.categories)
+        for(i in 0..(category_array.size-1)){
+            if(intent.getStringExtra("category").trim().equals(category_array.get(i))){
+                category.setSelection(i)
+                break
+            }
+        }
 
 
     }
@@ -76,23 +83,7 @@ class UpdateTeacherSubject : AppCompatActivity() {
                         })
                     } else {
 
-                        PreferenceManager.getInstance(applicationContext)!!.setUserName(name_edit.text.toString().trim())
-                        PreferenceManager.getInstance(applicationContext)!!.setUserAddress(
-                            address_edit.text.toString().trim()
-                        )
-                        PreferenceManager.getInstance(applicationContext)!!.setUserPhone(
-                            phone_number_edit.text.toString().trim()
-                        )
 
-                        Dialogs.showMessage(this, message, "OK", object : AlertDialogInterface {
-                            override fun positiveButtonClick(dialogInterface: DialogInterface) {
-                                dialogInterface.dismiss()
-                                finish()
-                            }
-
-                            override fun negativeButtonClick(dialogInterface: DialogInterface) {
-                            }
-                        })
                     }
                 } catch (e: Exception) {
                     Log.i(LoginActivity.TAG, "exception : " + e);

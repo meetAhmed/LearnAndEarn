@@ -78,9 +78,9 @@ class HomeFragmentTeacherAdopter(var list: ArrayList<SubjectModel>) :
 
         }
     }
-    fun delete(view: View){
+    fun delete(){
 
-        var request = object : StringRequest(
+     /*   var request = object : StringRequest(
             Request.Method.POST, URLs.DELETE_TEACHER_SUBJECT,
             Response.Listener { response ->
 
@@ -106,7 +106,7 @@ class HomeFragmentTeacherAdopter(var list: ArrayList<SubjectModel>) :
             }
         }
 
-        RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
+        RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)*/
 
     }
 }
