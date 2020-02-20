@@ -30,8 +30,13 @@ object URLs {
     val SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/add"
     val FETCH_SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/read"
     val FETCH_SUBJECT_TEACHER = PROTOCOL + IP_ADDRESS + PORT + "/subject/read/teacher"
-    val STUDENT_REGISTERED_SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/fetchStudentRegistereSubjects"
-    val TEACHER_CLASS_STUDENTS = PROTOCOL + IP_ADDRESS + PORT + "/subject/fetchTeacherClassRoomStudents"
+    val STUDENT_REGISTERED_SUBJECT =
+        PROTOCOL + IP_ADDRESS + PORT + "/subject/fetchStudentRegistereSubjects"
+    val TEACHER_CLASS_STUDENTS =
+        PROTOCOL + IP_ADDRESS + PORT + "/subject/fetchTeacherClassRoomStudents"
+    val DELETE_TEACHER_SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/deleteTeacherSubject"
+    val UPDATE_TEACHER_SUBJECT = PROTOCOL + IP_ADDRESS + PORT + "/subject/updateTeacherSubject"
+
 
     // payment
     val PAY = PROTOCOL + IP_ADDRESS + PORT + "/payment/pay"
@@ -46,5 +51,6 @@ object URLs {
     fun getImageUrl(image_name: String?): String {
         return PROTOCOL + IP_ADDRESS + PORT + "/uploadedFiles/$image_name"
     }
-
 }
+
+

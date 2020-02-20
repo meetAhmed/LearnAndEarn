@@ -39,6 +39,8 @@ class TeacherList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subject_list)
 
+
+
         supportActionBar!!.hide()
 
         subject = intent.getStringExtra("subject")

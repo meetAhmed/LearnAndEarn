@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:layout_height="match_parent"
+    tools:context=".Activities.UpdateTeacherSubject">
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Edit Subject Detail"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#00BFA5"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Select Category" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/bg_border"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp">
+
+        <Spinner
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/categories"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:id="@+id/subject_name"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:layout_weight="1"
+
+        android:layout_height="wrap_content"
+        app:met_hideUnderline="true"
+        android:hint="Subject Name" />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:id="@+id/description"
+        android:layout_marginTop="20dp"
+
+        android:paddingLeft="10dp"
+        android:layout_weight="1"
+
+        android:layout_height="wrap_content"
+        app:met_hideUnderline="true"
+        android:hint="Description" />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:id="@+id/price_per_month"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="20dp"
+
+        android:layout_weight="1"
+
+        android:layout_height="wrap_content"
+        app:met_hideUnderline="true"
+        android:hint="Price Per Month" />
+    <Button
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Update"
+        android:onClick="update_teacher_subject"
+        android:background="@drawable/filled_light_blue"
+        android:textColor="#EEFBFBFB"/>
+
+
+
+
+
+</LinearLayout>
+
+
+</LinearLayout>
