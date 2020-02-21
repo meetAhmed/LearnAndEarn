@@ -9,12 +9,16 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
+import aust.fyp.learn.and.earn.Models.EducationHistoryModel
+import aust.fyp.learn.and.earn.Models.SubjectModel
 import aust.fyp.learn.and.earn.R
 import aust.fyp.learn.and.earn.StoreRoom.*
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
+import io.realm.Realm
 import org.json.JSONObject
 
 class UpdateTeacherSubject : AppCompatActivity() {
@@ -53,7 +57,7 @@ class UpdateTeacherSubject : AppCompatActivity() {
 
 
     }
-    fun update(view : View){
+    fun update_teacher_subject(view : View){
         progressDialog.setMessage("updating subject detail")
         progressDialog.show()
 
@@ -68,12 +72,11 @@ class UpdateTeacherSubject : AppCompatActivity() {
                     }
 
                     var mainOb = JSONObject(response)
-                    var message = mainOb.getString("message")
                     val error = mainOb.getBoolean("error")
 
                     if (error) {
                         // error
-                        Dialogs.showMessage(this, message, "OK", object : AlertDialogInterface {
+                        Dialogs.showMessage(this, mainOb.getString("message"), "OK", object : AlertDialogInterface {
                             override fun positiveButtonClick(dialogInterface: DialogInterface) {
                                 dialogInterface.dismiss()
                             }
@@ -82,6 +85,23 @@ class UpdateTeacherSubject : AppCompatActivity() {
                             }
                         })
                     } else {
+
+                        Realm.getDefaultInstance().executeTransaction { realm ->
+
+                            var model = realm.where(SubjectModel::class.java).equalTo("ID",intent.getIntExtra("ID",0)).findFirst();
+                            if(model != null){
+
+                                model.category = category.selectedItem.toString().toLowerCase().trim()
+                                model.subject_name = subject_name.text.toString()
+                                model.description = description.text.toString()
+                                model.price_per_month  = (price_per_month.text.toString().trim()).toDouble()
+
+                                Toast.makeText(applicationContext, "updated successfully", Toast.LENGTH_SHORT).show()
+                                finish()
+
+                            }
+
+                        }
 
 
                     }

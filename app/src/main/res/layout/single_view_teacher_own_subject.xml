@@ -71,8 +71,8 @@
                     android:layout_height="wrap_content"
                     android:text="update"
                     android:textColor="#fff"
+                    android:id="@+id/update"
                     android:textStyle="bold"
-                    android:onClick="update"
                     android:background="@drawable/filled_light_green">
 
                 </Button>
@@ -80,8 +80,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="delete"
+                    android:id="@+id/delete"
                     android:textColor="#fff"
-                    android:onClick="delete"
                     android:layout_marginTop="5dp"
                     android:textStyle="bold"
                     android:background="@drawable/filled_light_green">
