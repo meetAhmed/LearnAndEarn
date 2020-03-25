@@ -70,7 +70,7 @@ class ClassRoomFragmentStudent : Fragment() {
 
         recView = view.findViewById(R.id.recView)
         recView.layoutManager = LinearLayoutManager(context)
-
+        recView.adapter = adapter
 
         return view
     }

@@ -45,7 +45,7 @@ class UpdateTeacherSubject : AppCompatActivity() {
 
         subject_name.setText(intent.getStringExtra("subject_name"))
         description.setText(intent.getStringExtra("description"))
-        price_per_month.setText(intent.getStringExtra("price_per_month"))
+        price_per_month.setText(intent.getDoubleExtra("price_per_month",0.0).toString())
 
     var category_array = resources.getStringArray(R.array.categories)
         for(i in 0..(category_array.size-1)){
@@ -121,14 +121,12 @@ class UpdateTeacherSubject : AppCompatActivity() {
             }) {
             override fun getParams(): MutableMap<String, String> {
                 var map = HashMap<String, String>()
-                map["userid"] =
-                    PreferenceManager.getInstance(applicationContext)!!.getUserId().toString()
+                map["userid"] = PreferenceManager.getInstance(applicationContext)!!.getUserId().toString()
                 map["category"] = category.selectedItem.toString().toLowerCase().trim()
                 map["subject_name"] = subject_name.text.toString().trim()
                 map["description"] = description.text.toString().trim()
                 map["price_per_month"] = price_per_month.text.toString().trim()
-
-
+                map["subject_id"] = intent.getIntExtra("ID",0).toString()
                 return map
             }
         }

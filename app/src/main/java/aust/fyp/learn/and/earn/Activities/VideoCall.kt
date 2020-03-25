@@ -1,6 +1,7 @@
 package aust.fyp.learn.and.earn.Activities
 
 import android.Manifest
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,13 @@ import com.opentok.android.OpentokError
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import android.opengl.GLSurfaceView
+import aust.fyp.learn.and.earn.Interfaces.AlertDialogInterface
+import aust.fyp.learn.and.earn.StoreRoom.Dialogs
+import aust.fyp.learn.and.earn.StoreRoom.PreferenceManager
+import aust.fyp.learn.and.earn.StoreRoom.SocketConnectionHandler
+import com.github.nkzawa.socketio.client.Ack
+import com.github.nkzawa.socketio.client.Socket
+import org.json.JSONObject
 import javax.microedition.khronos.opengles.GL
 
 class VideoCall : AppCompatActivity(), Session.SessionListener, PublisherKit.PublisherListener {
@@ -38,15 +46,17 @@ class VideoCall : AppCompatActivity(), Session.SessionListener, PublisherKit.Pub
 
     companion object {
         var API_KEY: String = "46515452"
-        var SESSION_ID: String =
-            "1_MX40NjUxNTQ1Mn5-MTU4MjAyNTc5MzUwOH5QOTVEaHFYbSswck1GUFU0cDhnOGI0K1R-fg"
-        var TOKEN: String =
-            "T1==cGFydG5lcl9pZD00NjUxNTQ1MiZzaWc9N2Y3YzAzNjY3OGE1YjNiOTBjZThjMzA2NjdmYzJjY2E0MWQzN2U0ZDpzZXNzaW9uX2lkPTFfTVg0ME5qVXhOVFExTW41LU1UVTRNakF5TlRjNU16VXdPSDVRT1RWRWFIRlliU3N3Y2sxR1VGVTBjRGhuT0dJMEsxUi1mZyZjcmVhdGVfdGltZT0xNTgyMDI1ODI3Jm5vbmNlPTAuOTQ0MzgzMDE1MzAzODI1NyZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNTg0NjE0MjI3JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9"
+        ///  var SESSION_ID: String = "1_MX40NjUxNTQ1Mn5-MTU4MjAyNTc5MzUwOH5QOTVEaHFYbSswck1GUFU0cDhnOGI0K1R-fg"
+        var SESSION_ID: String = "subject-id"
+        //  var TOKEN: String = "T1==cGFydG5lcl9pZD00NjUxNTQ1MiZzaWc9N2Y3YzAzNjY3OGE1YjNiOTBjZThjMzA2NjdmYzJjY2E0MWQzN2U0ZDpzZXNzaW9uX2lkPTFfTVg0ME5qVXhOVFExTW41LU1UVTRNakF5TlRjNU16VXdPSDVRT1RWRWFIRlliU3N3Y2sxR1VGVTBjRGhuT0dJMEsxUi1mZyZjcmVhdGVfdGltZT0xNTgyMDI1ODI3Jm5vbmNlPTAuOTQ0MzgzMDE1MzAzODI1NyZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNTg0NjE0MjI3JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9"
+        var TOKEN: String = "subject-id-token"
         var LOG_TAG: String = "VideoCall"
         var RC_SETTINGS_SCREEN_PERM: Int = 123
         var RC_VIDEO_APP_PERM: Int = 124
         var permissions_code = 200
     }
+
+    var TAG = "VideoCall"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,12 +65,15 @@ class VideoCall : AppCompatActivity(), Session.SessionListener, PublisherKit.Pub
         mPublisherViewContainer = findViewById(R.id.mPublisherViewContainer)
         mSubscriberViewContainer = findViewById(R.id.mSubscriberViewContainer)
 
+
+    }
+
+    fun startClassRoom() {
         if (permissionsAllow()) {
             establishSession()
         } else {
             requestPermissions()
         }
-
     }
 
     fun permissionsAllow(): Boolean {
@@ -147,7 +160,8 @@ class VideoCall : AppCompatActivity(), Session.SessionListener, PublisherKit.Pub
     }
 
     override fun onError(p0: Session?, p1: OpentokError?) {
-
+        Log.i(TAG,"error: $p0")
+        Log.i(TAG,"error: $p1")
     }
 
     override fun onStreamCreated(p0: PublisherKit?, p1: Stream?) {
@@ -159,7 +173,8 @@ class VideoCall : AppCompatActivity(), Session.SessionListener, PublisherKit.Pub
     }
 
     override fun onError(p0: PublisherKit?, p1: OpentokError?) {
-
+        Log.i(TAG,"error: $p0")
+        Log.i(TAG,"error: $p1")
     }
 
 }

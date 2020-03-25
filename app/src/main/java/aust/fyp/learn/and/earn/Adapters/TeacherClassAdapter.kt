@@ -10,6 +10,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import aust.fyp.learn.and.earn.Activities.TeacherDetailsActivity
+import aust.fyp.learn.and.earn.Activities.Teacher_Call_activity
+import aust.fyp.learn.and.earn.Activities.VideoCall
 import aust.fyp.learn.and.earn.Models.EducationHistoryModel
 import aust.fyp.learn.and.earn.Models.StudentRegisteredCourses
 import aust.fyp.learn.and.earn.Models.SubjectModel
@@ -59,5 +61,13 @@ class TeacherClassAdapter(var list: ArrayList<TeacherClassStudentModel>) :
     ) {
         holder.subject_name.setText(list.get(position).subject_name)
         holder.student_name.setText(list.get(position).student_name)
+
+        holder.itemView.setOnClickListener {
+            var intent = Intent(context, Teacher_Call_activity::class.java)
+            intent.putExtra("student_id", list.get(position).student_id)
+            intent.putExtra("subject_name", list.get(position).subject_name)
+            intent.putExtra("student_name", list.get(position).student_name)
+            context.startActivity(intent)
+        }
     }
 }
