@@ -66,110 +66,109 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@drawable/bg_border"
-            android:paddingTop="10dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@drawable/bg_border"
             android:paddingLeft="10dp"
-            android:paddingBottom="3dp"
+            android:paddingTop="10dp"
             android:paddingRight="3dp"
-            android:layout_height="wrap_content">
+            android:paddingBottom="3dp">
 
             <com.rengwuxian.materialedittext.MaterialEditText
 
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:met_hideUnderline="true"
-                android:id="@+id/email"
-                android:hint="Email Address" />
+                android:hint="Email Address"
+                app:met_hideUnderline="true" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@drawable/bg_border"
-            android:paddingTop="10dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@drawable/bg_border"
             android:paddingLeft="10dp"
-            android:paddingBottom="3dp"
+            android:paddingTop="10dp"
             android:paddingRight="3dp"
 
-            android:layout_height="wrap_content">
+            android:paddingBottom="3dp">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
-
-                app:met_hideUnderline="true"
                 android:id="@+id/password"
+
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password" />
+                android:hint="Password"
+                app:met_hideUnderline="true" />
 
         </LinearLayout>
 
         <TextView
-            android:layout_width="match_parent"
-            android:text="Forgot Password ?"
-            android:textStyle="bold"
             android:id="@+id/restore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="end"
             android:onClick="restore_password"
-            android:layout_marginTop="10dp"
+            android:text="Forgot Password ?"
             android:textColor="#00BFA5"
             android:textSize="18sp"
-            android:layout_height="wrap_content" />
+            android:textStyle="bold" />
 
 
         <Button
             android:layout_width="150dp"
-            android:layout_marginTop="10dp"
-            android:onClick="login"
-            android:layout_gravity="center"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:text="LoGIN"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:background="@drawable/filled_green"
-          />
+            android:onClick="login"
+            android:text="LoGIN"
+            android:textColor="#fff"
+            android:textStyle="bold" />
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:layout_width="match_parent"
             android:text="or"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
             android:textSize="18sp"
-            android:layout_height="wrap_content" />
+            android:textStyle="bold" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-           
-            android:layout_gravity="center"
-            android:textColor="#818181"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:onClick="teacher_account"
             android:id="@+id/teacherAccount"
-            android:background="@drawable/bg_border"
-            android:text="Create Account As Teacher" />
-
-        <Button
             android:layout_width="match_parent"
 
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:textColor="#818181"
-            android:textStyle="bold"
-            android:id="@+id/studentAccount"
-            android:onClick="student_account"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_border"
-            android:text="Create Account As Student" />
+            android:onClick="teacher_account"
+            android:text="Create Account As Teacher"
+            android:textColor="#818181"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/studentAccount"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_border"
+            android:onClick="student_account"
+            android:text="Create Account As Student"
+            android:textColor="#818181"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
