@@ -13,7 +13,17 @@ object Store {
         list.add(CategoryModel("FSC", R.drawable.fsc))
         list.add(CategoryModel("BS", R.drawable.bs))
         list.add(CategoryModel("MS", R.drawable.ms))
-        list.add(CategoryModel("Others", R.drawable.filled_grey))
+        list.add(CategoryModel("PHD", R.drawable.ms))
+        list.add(CategoryModel("Medical", R.drawable.ms))
+        list.add(CategoryModel("Primary-Class", R.drawable.ms))
+        list.add(CategoryModel("Secondary-Class", R.drawable.ms))
+        list.add(CategoryModel("Science", R.drawable.ms))
+        list.add(CategoryModel("Engineering", R.drawable.ms))
+        list.add(CategoryModel("Diploma", R.drawable.ms))
+        list.add(CategoryModel("Arts", R.drawable.ms))
+        list.add(CategoryModel("Religion", R.drawable.ms))
+        list.add(CategoryModel("Cooking", R.drawable.ms))
+        list.add(CategoryModel("Others", R.drawable.others))
         return list
     }
 

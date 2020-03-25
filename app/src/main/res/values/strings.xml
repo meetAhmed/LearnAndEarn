@@ -21,13 +21,13 @@
         <item>BS</item>
         <item>MS</item>
         <item>PHD</item>
-        <item>DIPLOMA</item>
+        <item>Diploma</item>
         <item>Medical</item>
         <item>Engineering</item>
         <item>Arts</item>
         <item>Science</item>
-        <item>Class 1 - 5</item>
-        <item>Class 6 - 8</item>
+        <item>Primary-Class</item>
+        <item>Secondary-Class</item>
         <item>Cooking</item>
         <item>Religion</item>
         <item>Others</item>

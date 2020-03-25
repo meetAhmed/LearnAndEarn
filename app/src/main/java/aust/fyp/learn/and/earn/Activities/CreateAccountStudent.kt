@@ -96,7 +96,7 @@ class CreateAccountStudent : AppCompatActivity() {
                 email_str,
                 password_str,
                 phonenumber_str
-            );
+            )
         }
 
 

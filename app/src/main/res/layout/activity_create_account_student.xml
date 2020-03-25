@@ -114,7 +114,7 @@
                 android:id="@+id/address"
                 android:layout_height="wrap_content"
                 app:met_hideUnderline="true"
-                android:hint="Address" />
+                android:hint="City" />
         </LinearLayout>
 
         <LinearLayout
@@ -133,7 +133,7 @@
                 android:inputType="phone"
                 android:layout_height="wrap_content"
                 app:met_hideUnderline="true"
-                android:hint="phonenumber" />
+                android:hint="phone number" />
 
         </LinearLayout>
 
