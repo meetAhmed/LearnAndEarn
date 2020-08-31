@@ -63,7 +63,7 @@ class VideoCall : AppCompatActivity(), Session.SessionListener, PublisherKit.Pub
         mPublisherViewContainer = findViewById(R.id.mPublisherViewContainer)
         mSubscriberViewContainer = findViewById(R.id.mSubscriberViewContainer)
 
-
+        startClassRoom()
     }
 
     fun startClassRoom() {
