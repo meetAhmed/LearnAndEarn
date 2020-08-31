@@ -45,11 +45,9 @@ class VideoCall : AppCompatActivity(), Session.SessionListener, PublisherKit.Pub
     var mSubscriber: Subscriber? = null
 
     companion object {
-        var API_KEY: String = "46515452"
-        ///  var SESSION_ID: String = "1_MX40NjUxNTQ1Mn5-MTU4MjAyNTc5MzUwOH5QOTVEaHFYbSswck1GUFU0cDhnOGI0K1R-fg"
-        var SESSION_ID: String = "subject-id"
-        //  var TOKEN: String = "T1==cGFydG5lcl9pZD00NjUxNTQ1MiZzaWc9N2Y3YzAzNjY3OGE1YjNiOTBjZThjMzA2NjdmYzJjY2E0MWQzN2U0ZDpzZXNzaW9uX2lkPTFfTVg0ME5qVXhOVFExTW41LU1UVTRNakF5TlRjNU16VXdPSDVRT1RWRWFIRlliU3N3Y2sxR1VGVTBjRGhuT0dJMEsxUi1mZyZjcmVhdGVfdGltZT0xNTgyMDI1ODI3Jm5vbmNlPTAuOTQ0MzgzMDE1MzAzODI1NyZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNTg0NjE0MjI3JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9"
-        var TOKEN: String = "subject-id-token"
+        var API_KEY: String = "46901874"
+         var SESSION_ID: String = "2_MX40NjkwMTg3NH5-MTU5ODc3NzQ4NTA5MH5jZFFEOGtYM2ovY2FZejN4ZWpKdTV5N3Z-fg"
+         var TOKEN: String = "T1==cGFydG5lcl9pZD00NjkwMTg3NCZzaWc9YjZjZDAyNWQ2YTQ5OTgyOTdhNzVlYzNhYjJiMDE5YmQ4Njc2MmM2YzpzZXNzaW9uX2lkPTJfTVg0ME5qa3dNVGczTkg1LU1UVTVPRGMzTnpRNE5UQTVNSDVqWkZGRU9HdFlNMm92WTJGWmVqTjRaV3BLZFRWNU4zWi1mZyZjcmVhdGVfdGltZT0xNTk4Nzc3NTU5Jm5vbmNlPTAuNTc1NDQzNzA0MzkzODI5JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE2MDEzNjk1NTgmaW5pdGlhbF9sYXlvdXRfY2xhc3NfbGlzdD0="
         var LOG_TAG: String = "VideoCall"
         var RC_SETTINGS_SCREEN_PERM: Int = 123
         var RC_VIDEO_APP_PERM: Int = 124

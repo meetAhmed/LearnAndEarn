@@ -80,20 +80,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_border"
-            android:paddingTop="10dp"
-            android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
-            android:paddingBottom="3dp"
+            android:paddingTop="10dp"
             android:paddingRight="3dp"
-            android:layout_height="wrap_content">
+            android:paddingBottom="3dp">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
                 android:id="@+id/full_name"
-                android:background="@drawable/bg_border"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
+                android:inputType="textMultiLine"
                 app:met_floatingLabel="highlight"
                 app:met_hideUnderline="true" />
 
@@ -101,78 +101,87 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_border"
-            android:paddingTop="10dp"
-            android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
-            android:paddingBottom="3dp"
+            android:paddingTop="10dp"
             android:paddingRight="3dp"
-            android:layout_height="wrap_content">
+            android:paddingBottom="3dp">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
                 android:id="@+id/address"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:met_hideUnderline="true"
-                android:hint="City" />
+                android:hint="City"
+                android:inputType="textMultiLine"
+                app:met_floatingLabel="highlight"
+                app:met_hideUnderline="true" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_border"
-            android:paddingTop="10dp"
-            android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
-            android:paddingBottom="3dp"
+            android:paddingTop="10dp"
             android:paddingRight="3dp"
-            android:layout_height="wrap_content">
+            android:paddingBottom="3dp">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
                 android:id="@+id/phonenumber"
-                android:inputType="phone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:met_hideUnderline="true"
-                android:hint="phone number" />
+                android:hint="Phone Number"
+                android:inputType="textMultiLine"
+                app:met_floatingLabel="highlight"
+                app:met_hideUnderline="true" />
 
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_border"
-            android:paddingTop="10dp"
-            android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
-            android:paddingBottom="3dp"
+            android:paddingTop="10dp"
             android:paddingRight="3dp"
-            android:layout_height="wrap_content">
+            android:paddingBottom="3dp">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
                 android:id="@+id/email"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:met_hideUnderline="true"
-                android:hint="Email Address" />
+                android:hint="Email"
+                android:inputType="textMultiLine"
+                app:met_floatingLabel="highlight"
+                app:met_hideUnderline="true" />
+
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_border"
-            android:paddingTop="10dp"
-            android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
-            android:paddingBottom="3dp"
+            android:paddingTop="10dp"
             android:paddingRight="3dp"
-            android:layout_height="wrap_content">
+            android:paddingBottom="3dp">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
                 android:id="@+id/password"
-                app:met_hideUnderline="true"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password" />
+                android:hint="Password"
+                android:inputType="textMultiLine"
+                app:met_floatingLabel="highlight"
+                app:met_hideUnderline="true" />
 
         </LinearLayout>
 

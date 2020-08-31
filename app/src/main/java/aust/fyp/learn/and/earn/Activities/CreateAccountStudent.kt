@@ -34,7 +34,7 @@ class CreateAccountStudent : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account_student)
-
+        supportActionBar!!.hide()
         progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
 

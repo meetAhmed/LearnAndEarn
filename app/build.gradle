@@ -22,13 +22,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-
     }
 
 }
+
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -56,9 +58,8 @@ dependencies {
 
     implementation 'com.stripe:stripe-android:8.7.0'
     implementation 'com.github.nkzawa:socket.io-client:0.6.0'
-    implementation 'com.opentok.android:opentok-android-sdk:2.16.3'
+    implementation 'com.opentok.android:opentok-android-sdk:2.16.5'
     implementation 'pub.devrel:easypermissions:3.0.0'
-
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
     implementation 'androidx.multidex:multidex:2.0.0'
 }
